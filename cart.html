@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giỏ Hàng & Thanh Toán Đơn Hàng - EcoFresh Market</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .cart-checkout-layout {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 30px;
+      padding: 40px 0 80px;
+    }
+    .cart-box, .checkout-box {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .cart-table-wrap {
+      margin-top: 16px;
+    }
+    .cart-item-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cart-item-row:last-child {
+      border-bottom: none;
+    }
+    .cart-item-img {
+      width: 70px;
+      height: 70px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+    }
+    .cart-item-info {
+      flex: 1;
+    }
+    .cart-item-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .cart-item-price {
+      font-size: 14px;
+      color: var(--primary-deep);
+      font-weight: 800;
+    }
+    .qty-ctrl-box {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+    .qty-btn {
+      width: 32px;
+      height: 32px;
+      background: white;
+      font-weight: bold;
+    }
+    .qty-val {
+      width: 36px;
+      text-align: center;
+      font-size: 13.5px;
+      font-weight: 700;
+    }
+    .item-delete-btn {
+      background: none;
+      color: var(--muted);
+      font-size: 16px;
+      padding: 6px;
+    }
+    .item-delete-btn:hover {
+      color: var(--danger);
+    }
+    
+    /* Shipping progress banner */
+    .freeship-progress-box {
+      background: var(--primary-bg);
+      border: 1px dashed var(--primary);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .freeship-text {
+      font-size: 13.5px;
+      color: var(--primary-deep);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .freeship-bar {
+      height: 8px;
+      background: #E2E8F0;
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+    .freeship-fill {
+      height: 100%;
+      background: var(--primary);
+      transition: width 0.4s ease;
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--slate);
+      margin-bottom: 6px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      background: white;
+    }
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+    }
+
+    /* Payment Radio Cards */
+    .payment-option-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .payment-option-card:hover, .payment-option-card.active {
+      border-color: var(--primary);
+      background: var(--primary-bg);
+    }
+    .payment-option-card input[type="radio"] {
+      accent-color: var(--primary);
+      width: 18px;
+      height: 18px;
+    }
+
+    /* VietQR dynamic display box */
+    .vietqr-box {
+      display: none;
+      background: #FFFFFF;
+      border: 2px solid var(--primary);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      text-align: center;
+      margin-top: 14px;
+      box-shadow: var(--shadow-md);
+    }
+    .vietqr-box.active {
+      display: block;
+    }
+    .vietqr-img {
+      width: 220px;
+      height: 220px;
+      margin: 12px auto;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px;
+      background: white;
+    }
+
+    /* Summary rows */
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: var(--slate);
+    }
+    .summary-row.total-row {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary-deep);
+      border-top: 2px dashed var(--border);
+      padding-top: 12px;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .cart-checkout-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-left">
+        <span class="top-bar-badge"><i class="fa-solid fa-lock"></i> Thanh toán an toàn 100%</span>
+        <span>Cam kết hoàn tiền trong 24h nếu sản phẩm không đạt chất lượng</span>
+      </div>
+      <div class="top-bar-right">
+        <a href="tel:19006868"><i class="fa-solid fa-phone"></i> Hỗ trợ đặt hàng: 1900 6868</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="brand-logo">
+          <div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+          <div>EcoFresh<span class="highlight">.</span></div>
+        </a>
+
+        <div style="font-size: 16px; font-weight: 700; color: var(--dark); display: flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-shield-check" style="color:var(--primary);"></i> Quy trình mua sắm & Thanh toán an toàn
+        </div>
+
+        <a href="products.html" class="btn btn-outline-white" style="color:var(--slate); border-color:var(--border);">
+          <i class="fa-solid fa-arrow-left"></i> Tiếp tục chọn món
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="container">
+    <div class="cart-checkout-layout">
+      
+      <!-- Left Column: Cart Items List -->
+      <section class="cart-box">
+        <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
+          <i class="fa-solid fa-basket-shopping" style="color:var(--primary);"></i> Giỏ hàng của bạn
+          <span style="font-size: 14px; font-weight: normal; color: var(--muted);">(<span id="cart-item-count-text">0</span> món)</span>
+        </h2>
+
+        <!-- Free shipping progress bar -->
+        <div class="freeship-progress-box">
+          <div class="freeship-text">
+            <i class="fa-solid fa-truck-fast"></i>
+            <span id="freeship-notice-text">Bạn chỉ cần mua thêm 300.000đ để được MIỄN PHÍ VẬN CHUYỂN</span>
+          </div>
+          <div class="freeship-bar">
+            <div class="freeship-fill" id="freeship-bar-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- Cart items list -->
+        <div class="cart-table-wrap" id="cart-items-container"></div>
+
+        <!-- Coupon code input -->
+        <div style="display: flex; gap: 10px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border);">
+          <input type="text" id="coupon-code-input" class="form-control" placeholder="Nhập mã ưu đãi (Thử: ECOFRESH50)" style="max-width: 300px; text-transform: uppercase;">
+          <button class="btn btn-primary" onclick="applyCouponCode()" style="padding: 10px 18px;">Áp dụng mã</button>
+        </div>
+        <div id="coupon-feedback" style="font-size: 13px; margin-top: 6px;"></div>
+
+      </section>
+
+      <!-- Right Column: Checkout & Payment Form -->
+      <section class="checkout-box">
+        <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 16px;">
+          <i class="fa-solid fa-file-invoice-dollar" style="color:var(--primary);"></i> Thông tin giao nhận & Thanh toán
+        </h2>
+
+        <form id="checkout-form" onsubmit="handlePlaceOrder(event)">
+          
+          <div class="form-group">
+            <label class="form-label">Họ và tên người nhận (*):</label>
+            <input type="text" id="order-fullname" class="form-control" placeholder="Nguyễn Văn A" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label class="form-label">Số điện thoại (*):</label>
+              <input type="tel" id="order-phone" class="form-control" placeholder="0988xxxxxx" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email nhận hóa đơn:</label>
+              <input type="email" id="order-email" class="form-control" placeholder="example@gmail.com">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Địa chỉ giao hàng chi tiết (*):</label>
+            <input type="text" id="order-address" class="form-control" placeholder="Số nhà, ngõ/ngách, tên đường, Quận/Huyện" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Khung giờ giao hàng giữ lạnh:</label>
+            <select id="order-timeslot" class="form-control">
+              <option value="giao-ngay">Giao hỏa tốc 2 giờ (Nội thành)</option>
+              <option value="sang">Khung giờ sáng (8h00 - 11h30)</option>
+              <option value="chieu">Khung giờ chiều (14h00 - 17h30)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Phương thức thanh toán:</label>
+            
+            <label class="payment-option-card active" onclick="selectPayment('vietqr')">
+              <input type="radio" name="payment_method" value="vietqr" checked>
+              <div>
+                <strong>Chuyển khoản VietQR động (Khuyên dùng)</strong>
+                <div style="font-size: 12px; color: var(--muted);">Quét mã trên App ngân hàng, tự động khớp lệnh sau 3 giây</div>
+              </div>
+            </label>
+
+            <label class="payment-option-card" onclick="selectPayment('cod')">
+              <input type="radio" name="payment_method" value="cod">
+              <div>
+                <strong>Thanh toán khi nhận hàng (COD)</strong>
+                <div style="font-size: 12px; color: var(--muted);">Được kiểm tra độ tươi ngon trước khi thanh toán tiền mặt</div>
+              </div>
+            </label>
+
+            <label class="payment-option-card" onclick="selectPayment('vnpay')">
+              <input type="radio" name="payment_method" value="vnpay">
+              <div>
+                <strong>Cổng VNPAY / Ví MoMo</strong>
+                <div style="font-size: 12px; color: var(--muted);">Thẻ ngân hàng nội địa Napas & Thẻ quốc tế Visa/Master</div>
+              </div>
+            </label>
+          </div>
+
+          <!-- VietQR Box -->
+          <div class="vietqr-box active" id="vietqr-preview-box">
+            <div style="font-size: 13px; font-weight: 700; color: var(--primary-deep);"><i class="fa-solid fa-qrcode"></i> MÃ VIETQR ĐỘNG TỰ ĐỘNG KHỚP LỆNH</div>
+            <img class="vietqr-img" id="vietqr-image-src" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=ECOFRESH_PAYMENT" alt="Mã VietQR">
+            <div style="font-size: 12px; color: var(--muted);">
+              Ngân hàng: <strong>MBBank (Quân Đội)</strong> • STK: <strong>0988668899</strong><br>
+              Chủ TK: <strong>CONG TY ECOFRESH VIET NAM</strong>
+            </div>
+          </div>
+
+          <!-- Order Summary Breakdown -->
+          <div style="background: var(--light-bg); border-radius: var(--radius-sm); padding: 16px; margin: 20px 0;">
+            <div class="summary-row">
+              <span>Tạm tính tiền hàng:</span>
+              <span id="summary-subtotal">0đ</span>
+            </div>
+            <div class="summary-row">
+              <span>Phí vận chuyển giữ lạnh:</span>
+              <span id="summary-shipping">30.000đ</span>
+            </div>
+            <div class="summary-row" style="color: var(--primary-dark); font-weight: 700;">
+              <span>Mã giảm giá ưu đãi:</span>
+              <span id="summary-discount">-0đ</span>
+            </div>
+            <div class="summary-row total-row">
+              <span>Tổng thanh toán:</span>
+              <span id="summary-total">0đ</span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 16px;">
+            <i class="fa-solid fa-check"></i> Xác nhận đặt hàng ngay
+          </button>
+
+          <p style="font-size: 12px; color: var(--muted); text-align: center; margin-top: 10px;">
+            Bằng việc nhấn đặt hàng, bạn đồng ý với <a href="javascript:void(0)" onclick="openContractModal()" style="text-decoration: underline; color: var(--primary);">Điều khoản hợp đồng điện tử</a> của EcoFresh.
+          </p>
+
+        </form>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Order Success Modal with Invoice -->
+  <div class="modal-overlay" id="order-success-modal">
+    <div class="modal-box" style="max-width: 580px; text-align: center;">
+      <div class="modal-body" style="padding: 36px 24px;">
+        <div style="width: 70px; height: 70px; border-radius: var(--radius-full); background: var(--primary-light); color: var(--primary-deep); font-size: 32px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <h2 style="font-size: 24px; font-weight: 800; color: var(--dark); margin-bottom: 6px;">ĐẶT HÀNG THÀNH CÔNG!</h2>
+        <p style="font-size: 14px; color: var(--muted); margin-bottom: 20px;">Hợp đồng điện tử đã được xác lập tự động. Mã đơn hàng của bạn là:</p>
+        
+        <div style="background: var(--light-bg); border: 2px dashed var(--primary); padding: 12px; border-radius: var(--radius-sm); font-size: 20px; font-weight: 800; color: var(--primary-deep); margin-bottom: 20px;" id="order-code-display">
+          #EF20261016-898
+        </div>
+
+        <div style="text-align: left; background: #F8FAFC; padding: 16px; border-radius: var(--radius-sm); font-size: 13.5px; margin-bottom: 24px;" id="order-summary-details"></div>
+
+        <div style="display: flex; gap: 12px; justify-content: center;">
+          <button class="btn btn-outline-white" onclick="window.print()" style="color:var(--slate); border-color:var(--border);">
+            <i class="fa-solid fa-print"></i> In hóa đơn
+          </button>
+          <a href="index.html" class="btn btn-primary">
+            <i class="fa-solid fa-house"></i> Quay về trang chủ
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="master-footer" style="margin-top: 20px;">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 EcoFresh Market. Đề án môn học Xây dựng Website Thương Mại Điện Tử.</div>
+        <div>Hotline giải quyết khiếu nại: 1900 6868</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products-data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    let currentPaymentMethod = 'vietqr';
+
+    function renderCartPage() {
+      const container = document.getElementById('cart-items-container');
+      const countText = document.getElementById('cart-item-count-text');
+      if (!container) return;
+
+      const totalItems = AppState.cart.reduce((s, i) => s + i.quantity, 0);
+      if (countText) countText.textContent = totalItems;
+
+      if (AppState.cart.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding: 40px 20px; color: var(--muted);">
+            <i class="fa-solid fa-basket-shopping" style="font-size: 48px; margin-bottom: 12px;"></i>
+            <h3>Giỏ hàng của bạn đang trống</h3>
+            <p style="font-size: 14px; margin-top: 4px;">Hãy chọn thêm nông sản tươi sạch để lấp đầy bữa cơm gia đình nhé!</p>
+            <a href="products.html" class="btn btn-primary" style="margin-top: 16px;">Đi chợ ngay</a>
+          </div>
+        `;
+        updateSummary(0);
+        return;
+      }
+
+      container.innerHTML = AppState.cart.map(item => `
+        <div class="cart-item-row">
+          <img class="cart-item-img" src="${item.image}" alt="${item.name}">
+          <div class="cart-item-info">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">${formatCurrency(item.price)} <span style="font-size:12px; color:var(--muted); font-weight:normal;">/ ${item.unit}</span></div>
+          </div>
+          <div class="qty-ctrl-box">
+            <button type="button" class="qty-btn" onclick="updateCartQuantity(${item.id}, -1)">-</button>
+            <span class="qty-val">${item.quantity}</span>
+            <button type="button" class="qty-btn" onclick="updateCartQuantity(${item.id}, 1)">+</button>
+          </div>
+          <div style="font-size:14px; font-weight:800; min-width:80px; text-align:right;">
+            ${formatCurrency(item.price * item.quantity)}
+          </div>
+          <button type="button" class="item-delete-btn" title="Xóa món" onclick="removeFromCart(${item.id})">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        </div>
+      `).join('');
+
+      const subtotal = AppState.cart.reduce((s, i) => s + (i.price * i.quantity), 0);
+      updateSummary(subtotal);
+    }
+
+    function updateSummary(subtotal) {
+      const freeshipThreshold = 300000;
+      let shipping = subtotal >= freeshipThreshold || subtotal === 0 ? 0 : 30000;
+      
+      // Freeship progress
+      const barFill = document.getElementById('freeship-bar-fill');
+      const noticeText = document.getElementById('freeship-notice-text');
+      if (barFill && noticeText) {
+        if (subtotal >= freeshipThreshold) {
+          barFill.style.width = '100%';
+          noticeText.innerHTML = '<span style="color:#059669; font-weight:800;">✓ BẠN ĐÃ ĐƯỢC MIỄN PHÍ VẬN CHUYỂN!</span>';
+        } else {
+          const pct = Math.min(100, Math.round((subtotal / freeshipThreshold) * 100));
+          barFill.style.width = `${pct}%`;
+          noticeText.textContent = `Bạn chỉ cần mua thêm ${formatCurrency(freeshipThreshold - subtotal)} để được MIỄN PHÍ VẬN CHUYỂN!`;
+        }
+      }
+
+      const total = Math.max(0, subtotal + shipping - AppState.currentDiscount);
+
+      document.getElementById('summary-subtotal').textContent = formatCurrency(subtotal);
+      document.getElementById('summary-shipping').textContent = shipping === 0 ? 'MIỄN PHÍ' : formatCurrency(shipping);
+      document.getElementById('summary-discount').textContent = `-${formatCurrency(AppState.currentDiscount)}`;
+      document.getElementById('summary-total').textContent = formatCurrency(total);
+
+      // Update VietQR
+      const qrImg = document.getElementById('vietqr-image-src');
+      if (qrImg) {
+        const orderCode = 'EF' + Math.floor(100000 + Math.random() * 900000);
+        qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=2|99|0988668899|ECOFRESH%20VIET%20NAM||0|0|${total}|${orderCode}|transfer_myqr`;
+      }
+    }
+
+    function applyCouponCode() {
+      const input = document.getElementById('coupon-code-input');
+      const feedback = document.getElementById('coupon-feedback');
+      const code = input?.value.trim().toUpperCase();
+
+      if (code === 'ECOFRESH50') {
+        AppState.currentDiscount = 50000;
+        AppState.appliedCoupon = code;
+        feedback.innerHTML = '<span style="color:#059669; font-weight:700;">✓ Đã áp dụng mã giảm 50.000đ thành công!</span>';
+        showToast('Áp dụng voucher giảm 50.000đ!');
+      } else if (code === 'FREESHIP') {
+        AppState.currentDiscount = 30000;
+        AppState.appliedCoupon = code;
+        feedback.innerHTML = '<span style="color:#059669; font-weight:700;">✓ Đã miễn phí vận chuyển 30.000đ!</span>';
+        showToast('Đã áp dụng mã miễn phí ship!');
+      } else {
+        feedback.innerHTML = '<span style="color:#DC2626;">Mã ưu đãi không hợp lệ hoặc đã hết lượt dùng</span>';
+      }
+      renderCartPage();
+    }
+
+    function selectPayment(method) {
+      currentPaymentMethod = method;
+      document.querySelectorAll('.payment-option-card').forEach(c => c.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+
+      const qrBox = document.getElementById('vietqr-preview-box');
+      if (qrBox) {
+        if (method === 'vietqr') qrBox.classList.add('active');
+        else qrBox.classList.remove('active');
+      }
+    }
+
+    function handlePlaceOrder(e) {
+      e.preventDefault();
+      if (AppState.cart.length === 0) {
+        showToast('Giỏ hàng trống! Vui lòng chọn sản phẩm trước khi đặt hàng.', 'error');
+        return;
+      }
+
+      const fullname = document.getElementById('order-fullname').value;
+      const phone = document.getElementById('order-phone').value;
+      const address = document.getElementById('order-address').value;
+      const timeslot = document.getElementById('order-timeslot').options[document.getElementById('order-timeslot').selectedIndex].text;
+      
+      const orderCode = '#EF' + Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('order-code-display').textContent = orderCode;
+
+      const subtotal = AppState.cart.reduce((s, i) => s + (i.price * i.quantity), 0);
+      const shipping = subtotal >= 300000 ? 0 : 30000;
+      const total = Math.max(0, subtotal + shipping - AppState.currentDiscount);
+
+      const summaryDetails = document.getElementById('order-summary-details');
+      if (summaryDetails) {
+        summaryDetails.innerHTML = `
+          <div><strong>Người nhận:</strong> ${fullname} (${phone})</div>
+          <div><strong>Địa chỉ:</strong> ${address}</div>
+          <div><strong>Khung giờ hẹn giao:</strong> ${timeslot}</div>
+          <div><strong>Phương thức thanh toán:</strong> ${currentPaymentMethod.toUpperCase()}</div>
+          <div style="margin-top:8px; border-top:1px dashed #cbd5e1; padding-top:8px;">
+            <strong>Tổng số tiền đã xác nhận:</strong> <span style="color:var(--primary-deep); font-weight:800; font-size:16px;">${formatCurrency(total)}</span>
+          </div>
+        `;
+      }
+
+      // Empty cart
+      AppState.cart = [];
+      saveCart();
+
+      // Open Modal
+      document.getElementById('order-success-modal').classList.add('active');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCartPage();
+    });
+  </script>
+</body>
+</html>

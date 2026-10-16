@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cửa Hàng Nông Sản Sạch & Thực Phẩm Hữu Cơ - EcoFresh Market</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .catalog-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 30px;
+      padding: 30px 0 60px;
+    }
+    .filter-sidebar {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      height: fit-content;
+    }
+    .filter-group {
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .filter-group:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .filter-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cat-tree-list {
+      list-style: none;
+    }
+    .cat-parent-item {
+      margin-bottom: 8px;
+    }
+    .cat-parent-btn {
+      width: 100%;
+      text-align: left;
+      background: none;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--slate);
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cat-parent-btn:hover, .cat-parent-btn.active {
+      background: var(--primary-bg);
+      color: var(--primary);
+    }
+    .cat-sub-list {
+      padding-left: 18px;
+      margin-top: 4px;
+      display: none;
+    }
+    .cat-sub-list.active {
+      display: block;
+    }
+    .cat-sub-item a {
+      display: block;
+      padding: 5px 8px;
+      font-size: 13px;
+      color: var(--muted);
+      border-radius: var(--radius-sm);
+    }
+    .cat-sub-item a:hover, .cat-sub-item a.active {
+      color: var(--primary-deep);
+      background: #F1F5F9;
+      font-weight: 600;
+    }
+    .price-range-inputs {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .price-input {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+    }
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+      color: var(--slate);
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    .checkbox-label input {
+      accent-color: var(--primary);
+      width: 16px;
+      height: 16px;
+    }
+    .catalog-top-bar {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .results-count {
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .results-count strong {
+      color: var(--dark);
+    }
+    .sort-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+    }
+    .sort-select {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 13.5px;
+      color: var(--slate);
+      background: white;
+    }
+    /* Service view cards */
+    .services-catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 30px;
+    }
+    .service-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 30px 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .service-card.featured {
+      border: 2px solid var(--primary);
+      box-shadow: var(--shadow-green);
+    }
+    .service-badge {
+      position: absolute;
+      top: -12px;
+      right: 24px;
+      background: var(--accent);
+      color: #000;
+      font-weight: 800;
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+    }
+    .service-card h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .service-price {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--primary-deep);
+      margin-bottom: 16px;
+    }
+    .service-features {
+      list-style: none;
+      margin-bottom: 24px;
+      flex: 1;
+    }
+    .service-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      color: var(--slate);
+      margin-bottom: 10px;
+    }
+    .service-features i {
+      color: var(--primary);
+      margin-top: 3px;
+    }
+    @media (max-width: 900px) {
+      .catalog-layout { grid-template-columns: 1fr; }
+      .services-catalog-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-left">
+        <span class="top-bar-badge"><i class="fa-solid fa-bolt"></i> Siêu ưu đãi</span>
+        <span><i class="fa-solid fa-truck-fast"></i> Miễn phí giao hàng cho đơn từ 300.000đ</span>
+      </div>
+      <div class="top-bar-right">
+        <a href="about.html"><i class="fa-solid fa-circle-info"></i> Giới thiệu</a>
+        <a href="contact.html"><i class="fa-solid fa-location-dot"></i> Hệ thống kho lạnh</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="brand-logo">
+          <div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+          <div>EcoFresh<span class="highlight">.</span></div>
+        </a>
+
+        <div class="header-search">
+          <div class="search-wrapper">
+            <i class="fa-solid fa-magnifying-glass" style="color: var(--muted); margin-right: 8px;"></i>
+            <input type="text" class="search-input" placeholder="Tìm kiếm trong danh mục...">
+            <button class="search-btn"><i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+          <div class="search-results-dropdown"></div>
+        </div>
+
+        <div class="header-actions">
+          <a href="cart.html" class="header-action-btn">
+            <div class="action-icon-wrap">
+              <i class="fa-solid fa-basket-shopping"></i>
+              <span class="badge-count cart-count-badge">0</span>
+            </div>
+            <div class="action-text">
+              <div class="label">Giỏ hàng</div>
+              <div class="value header-cart-total">0đ</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+      <div class="container">
+        <div class="nav-inner">
+          <ul class="main-nav">
+            <li class="nav-item"><a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
+            <li class="nav-item"><a href="about.html" class="nav-link"><i class="fa-solid fa-seedling"></i> Giới thiệu</a></li>
+            <li class="nav-item active"><a href="products.html" class="nav-link"><i class="fa-solid fa-carrot"></i> Sản phẩm</a></li>
+            <li class="nav-item"><a href="products.html?view=services" class="nav-link"><i class="fa-solid fa-box-open"></i> Gói Combo & Dịch vụ</a></li>
+            <li class="nav-item"><a href="news.html" class="nav-link"><i class="fa-solid fa-newspaper"></i> Tin tức</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link"><i class="fa-solid fa-headset"></i> Liên hệ</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Catalog Main Layout -->
+  <div class="container">
+    <div class="catalog-layout">
+      
+      <!-- Multi-criteria Filter Sidebar -->
+      <aside class="filter-sidebar">
+        
+        <!-- 2-Level Category Filter -->
+        <div class="filter-group">
+          <div class="filter-title">
+            <span><i class="fa-solid fa-list" style="color:var(--primary);"></i> Phân cấp danh mục</span>
+          </div>
+          <ul class="cat-tree-list" id="sidebar-cat-tree"></ul>
+        </div>
+
+        <!-- Filter by Price Range -->
+        <div class="filter-group">
+          <div class="filter-title">
+            <span><i class="fa-solid fa-tag" style="color:var(--primary);"></i> Khoảng giá (VNĐ)</span>
+          </div>
+          <div class="price-range-inputs">
+            <input type="number" id="price-min" class="price-input" placeholder="Từ" value="0">
+            <span>-</span>
+            <input type="number" id="price-max" class="price-input" placeholder="Đến" value="500000">
+          </div>
+          <button class="btn btn-primary" onclick="applyFilters()" style="width:100%; margin-top:10px; padding:8px; font-size:13px;">
+            Áp dụng giá
+          </button>
+        </div>
+
+        <!-- Filter by Certification -->
+        <div class="filter-group">
+          <div class="filter-title">
+            <span><i class="fa-solid fa-award" style="color:var(--primary);"></i> Tiêu chuẩn chứng nhận</span>
+          </div>
+          <label class="checkbox-label">
+            <input type="checkbox" value="VietGAP" class="cert-filter" onchange="applyFilters()"> VietGAP
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" value="USDA Organic" class="cert-filter" onchange="applyFilters()"> USDA Organic
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" value="GlobalGAP" class="cert-filter" onchange="applyFilters()"> GlobalGAP
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" value="HACCP" class="cert-filter" onchange="applyFilters()"> HACCP
+          </label>
+        </div>
+
+        <!-- Reset Button -->
+        <button class="btn btn-outline-white" onclick="resetFilters()" style="width:100%; color:var(--slate); border-color:var(--border);">
+          <i class="fa-solid fa-rotate-left"></i> Xóa tất cả bộ lọc
+        </button>
+
+      </aside>
+
+      <!-- Main Product Listing Content -->
+      <main class="catalog-main">
+        
+        <!-- Top Toolbar -->
+        <div class="catalog-top-bar">
+          <div class="results-count">
+            Hiển thị <strong id="product-count-display">0</strong> sản phẩm đạt chuẩn
+          </div>
+          <div class="sort-box">
+            <span>Sắp xếp theo:</span>
+            <select class="sort-select" id="sort-selector" onchange="applyFilters()">
+              <option value="default">Mặc định (Bán chạy)</option>
+              <option value="price-asc">Giá: Thấp đến Cao</option>
+              <option value="price-desc">Giá: Cao đến Thấp</option>
+              <option value="rating">Đánh giá cao nhất</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="products-grid-5" id="catalog-products-grid" style="grid-template-columns: repeat(3, 1fr);"></div>
+
+        <!-- Service Packages Section (Khi chọn view=services hoặc cuộn xuống) -->
+        <div id="services-section-wrapper" style="margin-top: 50px;">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <h2><i class="fa-solid fa-box-open" style="color:var(--primary);"></i> Các gói dịch vụ sơ chế & Đi chợ định kỳ</h2>
+              <p>Dịch vụ chuyên biệt giải phóng thời gian cho gia đình bận rộn</p>
+            </div>
+          </div>
+          <div class="services-catalog-grid" id="services-grid"></div>
+        </div>
+
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Product Detail Modal -->
+  <div class="modal-overlay" id="product-detail-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title"><i class="fa-solid fa-seedling" style="color:var(--primary);"></i> Chi tiết sản phẩm</div>
+        <button class="modal-close-btn" onclick="closeModal('product-detail-modal')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="master-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col">
+          <div class="brand-logo" style="color: white; margin-bottom: 12px;">
+            <div class="logo-icon" style="background: var(--primary);"><i class="fa-solid fa-leaf"></i></div>
+            <div>EcoFresh<span style="color: var(--primary-light);">.</span></div>
+          </div>
+          <p class="footer-desc">Công ty Cổ phần Thương mại Điện tử Nông sản Xanh EcoFresh.</p>
+          <ul class="footer-contact-list">
+            <li><i class="fa-solid fa-phone"></i> Đường dây nóng: 1900 6868</li>
+            <li><i class="fa-solid fa-envelope"></i> Thư điện tử: cskh@ecofresh.vn</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Về chúng tôi</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">Giới thiệu công ty</a></li>
+            <li><a href="news.html">Tin tức & cẩm nang</a></li>
+            <li><a href="contact.html">Liên hệ chúng tôi</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Chính sách</h4>
+          <ul class="footer-links">
+            <li><a href="cart.html">Vận chuyển lạnh</a></li>
+            <li><a href="about.html">Đổi trả 1-1 trong 24h</a></li>
+            <li><a href="contact.html">Bảo mật thông tin</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Thống kê truy cập</h4>
+          <div class="visitor-counter-box">
+            <div class="visitor-stat-row">
+              <span>Đang online trực tiếp:</span>
+              <span class="visitor-stat-value" id="stat-online-users">28</span>
+            </div>
+            <div class="visitor-stat-row">
+              <span>Lượt truy cập hôm nay:</span>
+              <span class="visitor-stat-value" id="stat-today-visits">1.482</span>
+            </div>
+            <div class="visitor-stat-row">
+              <span>Tổng lượt truy cập:</span>
+              <span class="visitor-stat-value" id="stat-total-visits">128.640</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 EcoFresh Market. Đề án môn học Xây dựng Website Thương Mại Điện Tử.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products-data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    let activeCat = '';
+    let activeSubCat = '';
+
+    // Render 2-Level Category Sidebar Tree
+    function renderCategoryTree() {
+      const tree = document.getElementById('sidebar-cat-tree');
+      if (!tree) return;
+
+      tree.innerHTML = `
+        <li class="cat-parent-item">
+          <button class="cat-parent-btn ${!activeCat ? 'active' : ''}" onclick="selectCategory('')">
+            <span><i class="fa-solid fa-border-all" style="margin-right:6px;"></i> Tất cả sản phẩm</span>
+            <span>(${PRODUCTS.length})</span>
+          </button>
+        </li>
+      ` + CATEGORIES.map(c => `
+        <li class="cat-parent-item">
+          <button class="cat-parent-btn ${activeCat === c.id ? 'active' : ''}" onclick="toggleCategory('${c.id}')">
+            <span><i class="${c.icon}" style="margin-right:6px; color:var(--primary);"></i> ${c.name}</span>
+            <i class="fa-solid fa-chevron-down" style="font-size:11px;"></i>
+          </button>
+          <ul class="cat-sub-list ${activeCat === c.id ? 'active' : ''}" id="sub-list-${c.id}">
+            ${c.children.map(sub => `
+              <li class="cat-sub-item">
+                <a href="javascript:void(0)" class="${activeSubCat === sub.id ? 'active' : ''}" onclick="selectSubCategory('${c.id}', '${sub.id}')">
+                  ${sub.name} <span style="font-size:11px; float:right;">(${sub.count})</span>
+                </a>
+              </li>
+            `).join('')}
+          </ul>
+        </li>
+      `).join('');
+    }
+
+    function toggleCategory(catId) {
+      if (activeCat === catId) {
+        activeCat = '';
+        activeSubCat = '';
+      } else {
+        activeCat = catId;
+        activeSubCat = '';
+      }
+      renderCategoryTree();
+      applyFilters();
+    }
+
+    function selectCategory(catId) {
+      activeCat = catId;
+      activeSubCat = '';
+      renderCategoryTree();
+      applyFilters();
+    }
+
+    function selectSubCategory(catId, subCatId) {
+      activeCat = catId;
+      activeSubCat = subCatId;
+      renderCategoryTree();
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const minPrice = parseFloat(document.getElementById('price-min')?.value) || 0;
+      const maxPrice = parseFloat(document.getElementById('price-max')?.value) || 999999999;
+      const sort = document.getElementById('sort-selector')?.value || 'default';
+      
+      const checkedCerts = Array.from(document.querySelectorAll('.cert-filter:checked')).map(cb => cb.value);
+
+      let filtered = PRODUCTS.filter(p => {
+        if (activeCat && p.category !== activeCat) return false;
+        if (activeSubCat && p.subCategory !== activeSubCat) return false;
+        if (p.price < minPrice || p.price > maxPrice) return false;
+        if (checkedCerts.length > 0 && !checkedCerts.some(c => p.cert.includes(c))) return false;
+        return true;
+      });
+
+      // Sort
+      if (sort === 'price-asc') filtered.sort((a, b) => a.price - b.price);
+      else if (sort === 'price-desc') filtered.sort((a, b) => b.price - a.price);
+      else if (sort === 'rating') filtered.sort((a, b) => b.rating - a.rating);
+
+      document.getElementById('product-count-display').textContent = filtered.length;
+
+      const container = document.getElementById('catalog-products-grid');
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px; background: white; border-radius: var(--radius-md);">
+            <i class="fa-solid fa-basket-shopping" style="font-size: 48px; color: var(--muted); margin-bottom: 12px;"></i>
+            <h3>Không có sản phẩm nào phù hợp</h3>
+            <p style="color: var(--muted); font-size: 14px;">Hãy thử điều chỉnh lại khoảng giá hoặc bỏ bớt tiêu chí lọc</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(p => `
+        <div class="product-card">
+          <div class="product-badge-wrap">
+            ${p.oldPrice ? `<span class="badge-discount">-${Math.round((p.oldPrice - p.price)/p.oldPrice * 100)}%</span>` : ''}
+            <span class="badge-cert">${p.cert}</span>
+          </div>
+          <div class="product-img-wrap" onclick="openProductModal(${p.id})">
+            <img src="${p.image}" alt="${p.name}">
+            <div class="product-quick-actions">
+              <button class="quick-btn" title="Xem chi tiết" onclick="event.stopPropagation(); openProductModal(${p.id})"><i class="fa-solid fa-eye"></i></button>
+              <button class="quick-btn" title="Thêm vào giỏ" onclick="event.stopPropagation(); addToCart(${p.id})"><i class="fa-solid fa-basket-shopping"></i></button>
+            </div>
+          </div>
+          <div class="product-body">
+            <span class="product-category">${p.categoryName}</span>
+            <h3 class="product-title" onclick="openProductModal(${p.id})">${p.name}</h3>
+            <div class="product-origin"><i class="fa-solid fa-location-dot" style="color:var(--primary);"></i> ${p.origin}</div>
+            <div class="product-footer">
+              <div class="product-price-box">
+                <span class="price-current">${formatCurrency(p.price)}</span>
+                ${p.oldPrice ? `<span class="price-old">${formatCurrency(p.oldPrice)}</span>` : ''}
+              </div>
+              <button class="add-cart-btn" onclick="addToCart(${p.id})">
+                <i class="fa-solid fa-basket-shopping"></i> Thêm giỏ
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function resetFilters() {
+      document.getElementById('price-min').value = 0;
+      document.getElementById('price-max').value = 500000;
+      document.querySelectorAll('.cert-filter').forEach(cb => cb.checked = false);
+      activeCat = '';
+      activeSubCat = '';
+      renderCategoryTree();
+      applyFilters();
+    }
+
+    // Render Services
+    function renderServices() {
+      const container = document.getElementById('services-grid');
+      if (!container) return;
+      container.innerHTML = SERVICES.map(s => `
+        <div class="service-card ${s.id === 'sub-family' ? 'featured' : ''}">
+          ${s.id === 'sub-family' ? '<span class="service-badge">PHỔ BIẾN NHẤT</span>' : ''}
+          <h3>${s.name}</h3>
+          <div class="service-price">${s.price}</div>
+          <div style="font-size: 13px; color: var(--primary-dark); font-weight: 700; margin-bottom: 12px;">
+            <i class="fa-solid fa-clock"></i> ${s.frequency}
+          </div>
+          <p style="font-size: 13px; color: var(--muted); margin-bottom: 16px;">Phù hợp: <strong>${s.idealFor}</strong></p>
+          <ul class="service-features">
+            ${s.features.map(f => `<li><i class="fa-solid fa-check"></i> <span>${f}</span></li>`).join('')}
+          </ul>
+          <button class="btn btn-primary" onclick="showToast('Đã gửi yêu cầu đăng ký tư vấn gói ${s.name}!')" style="width:100%;">
+            Đăng ký gói dịch vụ
+          </button>
+        </div>
+      `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Parse URL parameters
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('cat')) activeCat = params.get('cat');
+      if (params.get('sub')) activeSubCat = params.get('sub');
+
+      renderCategoryTree();
+      applyFilters();
+      renderServices();
+    });
+  </script>
+</body>
+</html>

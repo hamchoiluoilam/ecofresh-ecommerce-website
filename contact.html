@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liên Hệ & Hỗ Trợ Khách Hàng - EcoFresh Market</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .contact-page-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding: 40px 0 80px;
+    }
+    .contact-form-box {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 30px;
+      box-shadow: var(--shadow-sm);
+    }
+    .contact-info-box {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .info-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .info-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: var(--primary-bg);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .map-frame-box {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+      height: 300px;
+      background: #E2E8F0;
+    }
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 900px) {
+      .contact-page-layout { grid-template-columns: 1fr; }
+      .form-row-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-left">
+        <span class="top-bar-badge"><i class="fa-solid fa-headset"></i> Trung tâm hỗ trợ 24/7</span>
+        <span>Chúng tôi luôn lắng nghe và phản hồi mọi yêu cầu trong 15 phút</span>
+      </div>
+      <div class="top-bar-right">
+        <a href="tel:19006868"><i class="fa-solid fa-phone"></i> Hotline: 1900 6868</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="brand-logo">
+          <div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+          <div>EcoFresh<span class="highlight">.</span></div>
+        </a>
+
+        <div class="header-search">
+          <div class="search-wrapper">
+            <i class="fa-solid fa-magnifying-glass" style="color: var(--muted); margin-right: 8px;"></i>
+            <input type="text" class="search-input" placeholder="Tìm kiếm...">
+            <button class="search-btn"><i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+          <div class="search-results-dropdown"></div>
+        </div>
+
+        <div class="header-actions">
+          <a href="cart.html" class="header-action-btn">
+            <div class="action-icon-wrap">
+              <i class="fa-solid fa-basket-shopping"></i>
+              <span class="badge-count cart-count-badge">0</span>
+            </div>
+            <div class="action-text">
+              <div class="label">Giỏ hàng</div>
+              <div class="value header-cart-total">0đ</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+      <div class="container">
+        <div class="nav-inner">
+          <ul class="main-nav">
+            <li class="nav-item"><a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
+            <li class="nav-item"><a href="about.html" class="nav-link"><i class="fa-solid fa-seedling"></i> Giới thiệu</a></li>
+            <li class="nav-item"><a href="products.html" class="nav-link"><i class="fa-solid fa-carrot"></i> Sản phẩm</a></li>
+            <li class="nav-item"><a href="products.html?cat=combo-gia-dinh" class="nav-link"><i class="fa-solid fa-box-open"></i> Gói Combo</a></li>
+            <li class="nav-item"><a href="news.html" class="nav-link"><i class="fa-solid fa-newspaper"></i> Tin tức</a></li>
+            <li class="nav-item active"><a href="contact.html" class="nav-link"><i class="fa-solid fa-headset"></i> Liên hệ</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <div class="contact-page-layout">
+      
+      <!-- Contact Form -->
+      <section class="contact-form-box">
+        <h2 style="font-size: 22px; font-weight: 800; color: var(--dark); margin-bottom: 6px;">
+          Gửi Yêu Cầu & Phản Ánh
+        </h2>
+        <p style="font-size: 14px; color: var(--muted); margin-bottom: 24px;">
+          Vui lòng điền thông tin vào biểu mẫu dưới đây, nhân viên EcoFresh sẽ liên hệ lại ngay với bạn.
+        </p>
+
+        <form id="contact-form" onsubmit="handleContactSubmit(event)">
+          
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">Họ và tên (*):</label>
+              <input type="text" id="contact-name" class="form-control" placeholder="Nguyễn Văn A" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Số điện thoại (*):</label>
+              <input type="tel" id="contact-phone" class="form-control" placeholder="0988xxxxxx" required>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">Địa chỉ email (*):</label>
+              <input type="email" id="contact-email" class="form-control" placeholder="nguyenvana@gmail.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Địa chỉ sinh sống:</label>
+              <input type="text" id="contact-address" class="form-control" placeholder="Quận/Huyện, Tỉnh/Thành phố">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Chủ đề liên hệ:</label>
+            <select id="contact-subject" class="form-control">
+              <option value="tu-van">Tư vấn chọn mua thực phẩm sạch</option>
+              <option value="htx">Đăng ký làm Hợp tác xã / Nhà cung cấp liên kết</option>
+              <option value="khieu-nai">Báo lỗi sản phẩm & Yêu cầu đổi trả 1-1</option>
+              <option value="b2b">Hợp tác cung ứng nông sản cho doanh nghiệp</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Nội dung chi tiết (*):</label>
+            <textarea id="contact-message" class="form-control" rows="5" placeholder="Mô tả cụ thể yêu cầu của bạn..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 15px;">
+            <i class="fa-solid fa-paper-plane"></i> Gửi thông tin liên hệ
+          </button>
+
+        </form>
+      </section>
+
+      <!-- Contact Info & Interactive Map -->
+      <section class="contact-info-box">
+        
+        <div class="info-card">
+          <div class="info-icon"><i class="fa-solid fa-building"></i></div>
+          <div>
+            <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 4px;">Trụ sở chính & Hub kho lạnh</h4>
+            <p style="font-size: 13.5px; color: var(--muted); line-height: 1.5;">Số 123 Đường Cầu Giấy, Phường Dịch Vọng, Quận Cầu Giấy, Thành phố Hà Nội.</p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon"><i class="fa-solid fa-phone-volume"></i></div>
+          <div>
+            <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 4px;">Tổng đài hỗ trợ 24/7</h4>
+            <p style="font-size: 13.5px; color: var(--muted);">Đường dây nóng miễn phí: <strong>1900 6868</strong> (7h00 - 21h30 hàng ngày)</p>
+            <p style="font-size: 13.5px; color: var(--muted);">Thư điện tử: <strong>cskh@ecofresh.vn</strong></p>
+          </div>
+        </div>
+
+        <!-- Google Maps Iframe -->
+        <div class="map-frame-box">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.863855881441!2d105.78918687596959!3d21.038132787453474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab354920c233%3A0x5d0313a3bfdc4f37!2zQ-G6p3UgR2nhuqV5LCBIw6AgTuG7mWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1700000000000!5m2!1svi!2s" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="master-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 EcoFresh Market. Đề án môn học Xây dựng Website Thương Mại Điện Tử.</div>
+        <div>Hotline: 1900 6868 • Email: cskh@ecofresh.vn</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products-data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('contact-name').value;
+      const phone = document.getElementById('contact-phone').value;
+      const subject = document.getElementById('contact-subject').value;
+      
+      showToast(`Cảm ơn bạn ${name}! EcoFresh đã tiếp nhận yêu cầu và sẽ liên hệ qua SĐT ${phone} trong 15 phút.`);
+      document.getElementById('contact-form').reset();
+    }
+  </script>
+</body>
+</html>
