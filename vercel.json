@@ -1,12 +1,3 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "rewrites": [
-    { "source": "/gioi-thieu", "destination": "/about.html" },
-    { "source": "/san-pham", "destination": "/products.html" },
-    { "source": "/gio-hang", "destination": "/cart.html" },
-    { "source": "/tin-tuc", "destination": "/news.html" },
-    { "source": "/lien-he", "destination": "/contact.html" }
-  ]
+  "cleanUrls": true
 }
