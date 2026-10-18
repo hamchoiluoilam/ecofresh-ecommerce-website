@@ -118,6 +118,15 @@
       overflow: hidden;
       border: 1px solid var(--border);
       box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .farm-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-green);
+      border-color: var(--primary);
     }
     .farm-card img {
       height: 200px;
@@ -126,10 +135,14 @@
     }
     .farm-card-body {
       padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
     }
     .farm-card-body h4 {
-      font-size: 16px;
+      font-size: 16.5px;
       font-weight: 700;
+      color: var(--dark);
       margin-bottom: 6px;
     }
     .farm-card-body p {
@@ -137,7 +150,18 @@
       color: var(--muted);
       margin-bottom: 10px;
     }
-    @media (max-width: 768px) {
+    .coop-view-detail-btn {
+      margin-top: auto;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-top: 10px;
+      border-top: 1px dashed #E2E8F0;
+    }
+    @media (max-width: 900px) {
       .story-grid { grid-template-columns: 1fr; }
       .values-grid { grid-template-columns: repeat(2, 1fr); }
       .farm-partners-grid { grid-template-columns: 1fr; }
@@ -150,12 +174,12 @@
   <div class="top-bar">
     <div class="container">
       <div class="top-bar-left">
-        <span class="top-bar-badge"><i class="fa-solid fa-bolt"></i> Siêu ưu đãi</span>
-        <span><i class="fa-solid fa-truck-fast"></i> Miễn phí giao hàng cho đơn từ 300.000đ</span>
+        <span class="top-bar-badge"><i class="fa-solid fa-bolt"></i> Nông sản sạch</span>
+        <span>Mô hình Farm-to-Table liên kết trực tiếp với các Hợp tác xã đạt chuẩn</span>
       </div>
       <div class="top-bar-right">
         <a href="tel:19006868"><i class="fa-solid fa-phone"></i> Hotline: 1900 6868</a>
-        <a href="contact.html"><i class="fa-solid fa-headset"></i> Hỗ trợ trực tuyến</a>
+        <a href="contact.html"><i class="fa-solid fa-location-dot"></i> Trụ sở NEU</a>
       </div>
     </div>
   </div>
@@ -172,7 +196,7 @@
         <div class="header-search">
           <div class="search-wrapper">
             <i class="fa-solid fa-magnifying-glass" style="color: var(--muted); margin-right: 8px;"></i>
-            <input type="text" class="search-input" placeholder="Tìm kiếm sản phẩm...">
+            <input type="text" class="search-input" placeholder="Tìm kiếm nông sản sạch...">
             <button class="search-btn"><i class="fa-solid fa-arrow-right"></i></button>
           </div>
           <div class="search-results-dropdown"></div>
@@ -201,8 +225,8 @@
             <li class="nav-item"><a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
             <li class="nav-item active"><a href="about.html" class="nav-link"><i class="fa-solid fa-seedling"></i> Giới thiệu</a></li>
             <li class="nav-item"><a href="products.html" class="nav-link"><i class="fa-solid fa-carrot"></i> Sản phẩm</a></li>
-            <li class="nav-item"><a href="products.html?cat=combo-gia-dinh" class="nav-link"><i class="fa-solid fa-box-open"></i> Gói Combo</a></li>
-            <li class="nav-item"><a href="news.html" class="nav-link"><i class="fa-solid fa-newspaper"></i> Tin tức</a></li>
+            <li class="nav-item"><a href="products.html?view=services" class="nav-link"><i class="fa-solid fa-box-open"></i> Gói Combo</a></li>
+            <li class="nav-item"><a href="news.html" class="nav-link"><i class="fa-solid fa-newspaper"></i> Cẩm nang (40 bài)</a></li>
             <li class="nav-item"><a href="contact.html" class="nav-link"><i class="fa-solid fa-headset"></i> Liên hệ</a></li>
           </ul>
         </div>
@@ -214,7 +238,7 @@
   <section class="page-hero">
     <div class="container">
       <h1>Hành Trình Mang Nông Sản Sạch Đến Bàn Ăn</h1>
-      <p>EcoFresh Market cam kết 100% nông sản minh bạch nguồn gốc, canh tác hữu cơ chuẩn VietGAP vì một triệu bữa cơm gia đình Việt an lành.</p>
+      <p>EcoFresh Market cam kết 100% nông sản minh bạch nguồn gốc, liên kết trực tiếp với các Hợp tác xã đạt chuẩn VietGAP, GlobalGAP vì một triệu bữa cơm gia đình Việt an lành.</p>
     </div>
   </section>
 
@@ -230,7 +254,7 @@
         <span style="font-size: 13px; font-weight: 800; color: var(--primary); text-transform: uppercase;">Câu chuyện sáng lập</span>
         <h3>Kết Nối Nông Dân Chân Chính Với Bàn Ăn Đô Thị</h3>
         <p>Xuất phát từ nỗi trăn trở khi chứng kiến người nông dân trồng trọt có tâm nhưng bị thương lái ép giá, trong khi người dân thành phố lại hoang mang giữa rừng thực phẩm bẩn, đội ngũ sáng lập EcoFresh đã quyết tâm xây dựng mô hình sàn thương mại điện tử khép kín Farm-to-Table.</p>
-        <p>Chúng tôi trực tiếp ký hợp đồng bao tiêu dài hạn với hơn 50 hợp tác xã nông nghiệp tại Đà Lạt, Mộc Châu và Đồng bằng Sông Cửu Long, thiết lập chuỗi kho lạnh bảo quản hiện đại để từng ngọn rau, miếng thịt giữ trọn hương vị tươi mới nhất.</p>
+        <p>Chúng tôi trực tiếp ký hợp đồng bao tiêu dài hạn với hơn 50 hợp tác xã nông nghiệp tại Đà Lạt, Mộc Châu, Hòa Bình và Đồng bằng Sông Cửu Long, thiết lập chuỗi kho lạnh bảo quản hiện đại để từng ngọn rau, miếng thịt giữ trọn hương vị tươi mới nhất.</p>
       </div>
     </div>
 
@@ -246,7 +270,7 @@
       <div class="value-card">
         <div class="value-icon"><i class="fa-solid fa-leaf"></i></div>
         <h4>Tươi Ngon</h4>
-        <p>Thu hoạch trong vòng 24 giờ, bảo quản nhiệt độ chuẩn từ nông trại đến bàn ăn.</p>
+        <p>Thu hoạch trong vòng 24 giờ, bảo quản chuỗi lạnh từ nông trại đến bàn ăn.</p>
       </div>
       <div class="value-card">
         <div class="value-icon"><i class="fa-solid fa-qrcode"></i></div>
@@ -265,103 +289,57 @@
       </div>
     </div>
 
-    <!-- Farm Partners -->
+    <!-- Interactive Featured Cooperatives Section -->
     <div class="section-header">
       <div class="section-title-wrap">
-        <h2>Hợp Tác Xã Nông Nghiệp Tiêu Biểu</h2>
-        <p>Nơi sản sinh ra những giọt nước, mầm xanh đạt chuẩn chất lượng cao nhất</p>
+        <h2><i class="fa-solid fa-people-roof" style="color:var(--primary);"></i> Các Hợp Tác Xã Nông Nghiệp Tiêu Biểu</h2>
+        <p>Nhấp vào từng hợp tác xã để xem chi tiết quy trình canh tác, diện tích và chứng nhận kiểm định</p>
       </div>
     </div>
 
-    <div class="farm-partners-grid">
-      <div class="farm-card">
-        <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=600&q=80" alt="HTX Đơn Dương">
-        <div class="farm-card-body">
-          <h4>HTX Nông nghiệp Đơn Dương (Đà Lạt)</h4>
-          <p><i class="fa-solid fa-location-dot" style="color:var(--primary);"></i> Lâm Đồng • Quy mô: 45 hecta</p>
-          <span class="badge-cert">VietGAP & Hữu cơ</span>
-          <p style="margin-top: 8px; font-size: 13px;">Chuyên canh cải bó xôi, cải xoăn kale, xà lách thủy canh công nghệ Israel.</p>
-        </div>
-      </div>
-      <div class="farm-card">
-        <img src="https://images.unsplash.com/photo-1592417817098-8f3d69104a47?auto=format&fit=crop&w=600&q=80" alt="BioFresh Mộc Châu">
-        <div class="farm-card-body">
-          <h4>Nông trại BioFresh Mộc Châu</h4>
-          <p><i class="fa-solid fa-location-dot" style="color:var(--primary);"></i> Sơn La • Quy mô: 30 hecta</p>
-          <span class="badge-cert">GlobalGAP</span>
-          <p style="margin-top: 8px; font-size: 13px;">Cung ứng dâu tây giống Nhật, mận hậu hữu cơ và các loại củ quả ôn đới.</p>
-        </div>
-      </div>
-      <div class="farm-card">
-        <img src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=600&q=80" alt="Trang trại Hòa Bình">
-        <div class="farm-card-body">
-          <h4>Trang trại Chăn nuôi Thảo dược Hòa Bình</h4>
-          <p><i class="fa-solid fa-location-dot" style="color:var(--primary);"></i> Hòa Bình • Quy mô: 20 hecta</p>
-          <span class="badge-cert">HACCP</span>
-          <p style="margin-top: 8px; font-size: 13px;">Thịt heo vi sinh quế thảo mộc, gà đồi thả tự nhiên hoàn toàn không kháng sinh.</p>
-        </div>
-      </div>
-    </div>
+    <div class="farm-partners-grid" id="cooperatives-container"></div>
 
   </main>
 
   <!-- Footer -->
   <footer class="master-footer">
     <div class="container">
-      <div class="footer-top">
-        <div class="footer-col">
-          <div class="brand-logo" style="color: white; margin-bottom: 12px;">
-            <div class="logo-icon" style="background: var(--primary);"><i class="fa-solid fa-leaf"></i></div>
-            <div>EcoFresh<span style="color: var(--primary-light);">.</span></div>
-          </div>
-          <p class="footer-desc">Công ty Cổ phần Thương mại Điện tử Nông sản Xanh EcoFresh.</p>
-          <ul class="footer-contact-list">
-            <li><i class="fa-solid fa-phone"></i> Đường dây nóng: 1900 6868</li>
-            <li><i class="fa-solid fa-envelope"></i> Thư điện tử: cskh@ecofresh.vn</li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Liên kết nhanh</h4>
-          <ul class="footer-links">
-            <li><a href="index.html">Trang chủ</a></li>
-            <li><a href="products.html">Danh mục sản phẩm</a></li>
-            <li><a href="news.html">Cẩm nang nấu ăn</a></li>
-            <li><a href="contact.html">Liên hệ chúng tôi</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Chính sách</h4>
-          <ul class="footer-links">
-            <li><a href="cart.html">Chính sách giao hàng</a></li>
-            <li><a href="about.html">Chính sách đổi trả trong 24h</a></li>
-            <li><a href="contact.html">Bảo vệ thông tin</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Thống kê truy cập</h4>
-          <div class="visitor-counter-box">
-            <div class="visitor-stat-row">
-              <span>Đang online trực tiếp:</span>
-              <span class="visitor-stat-value" id="stat-online-users">28</span>
-            </div>
-            <div class="visitor-stat-row">
-              <span>Lượt truy cập hôm nay:</span>
-              <span class="visitor-stat-value" id="stat-today-visits">1.482</span>
-            </div>
-            <div class="visitor-stat-row">
-              <span>Tổng lượt truy cập:</span>
-              <span class="visitor-stat-value" id="stat-total-visits">128.640</span>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="footer-bottom">
         <div>© 2026 EcoFresh Market. Đề án môn học Xây dựng Website Thương Mại Điện Tử.</div>
+        <div>Trụ sở: Số 207 Giải Phóng, Hai Bà Trưng, Hà Nội (Đại học Kinh tế Quốc dân - NEU)</div>
       </div>
     </div>
   </footer>
 
   <script src="js/products-data.js"></script>
   <script src="js/app.js"></script>
+  <script>
+    function renderCooperatives() {
+      const container = document.getElementById('cooperatives-container');
+      if (!container || typeof COOPERATIVES === 'undefined') return;
+
+      container.innerHTML = COOPERATIVES.map(c => `
+        <div class="farm-card" onclick="openCooperativeModal('${c.id}')">
+          <img src="${c.image}" alt="${c.name}">
+          <div class="farm-card-body">
+            <span class="badge-cert" style="font-size:10px; width:fit-content; margin-bottom:6px;">${c.certCode.split('&')[0]}</span>
+            <h4>${c.name}</h4>
+            <p><i class="fa-solid fa-location-dot" style="color:var(--primary);"></i> ${c.location.split(',').slice(-2).join(',')}</p>
+            <div style="font-size:13px; color:var(--slate); margin-bottom:10px;">
+              <strong>Quy mô:</strong> ${c.scale}
+            </div>
+            <div class="coop-view-detail-btn">
+              <span>Xem chi tiết nông trại & quy trình</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCooperatives();
+    });
+  </script>
 </body>
 </html>

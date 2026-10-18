@@ -438,6 +438,7 @@
       </div>
       <div class="footer-bottom">
         <div>© 2026 EcoFresh Market. Đề án môn học Xây dựng Website Thương Mại Điện Tử.</div>
+        <div>Trụ sở: Số 207 Giải Phóng, Hai Bà Trưng, Hà Nội (Đại học Kinh tế Quốc dân - NEU) • Hotline: 1900 6868</div>
       </div>
     </div>
   </footer>
@@ -596,8 +597,8 @@
           <ul class="service-features">
             ${s.features.map(f => `<li><i class="fa-solid fa-check"></i> <span>${f}</span></li>`).join('')}
           </ul>
-          <button class="btn btn-primary" onclick="showToast('Đã gửi yêu cầu đăng ký tư vấn gói ${s.name}!')" style="width:100%;">
-            Đăng ký gói dịch vụ
+          <button class="btn btn-primary" onclick="bookService('${s.id}')" style="width:100%;">
+            <i class="fa-solid fa-basket-shopping" style="margin-right:6px;"></i> Đăng ký & Đi tới thanh toán
           </button>
         </div>
       `).join('');

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Liên Hệ & Hỗ Trợ Khách Hàng - EcoFresh Market</title>
+  <title>Liên Hệ & Bản Đồ Trụ Sở - EcoFresh Market (Đại Học Kinh Tế Quốc Dân)</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,7 +57,7 @@
       overflow: hidden;
       border: 1px solid var(--border);
       box-shadow: var(--shadow-md);
-      height: 300px;
+      height: 340px;
       background: #E2E8F0;
     }
     .form-row-2 {
@@ -78,7 +78,7 @@
     <div class="container">
       <div class="top-bar-left">
         <span class="top-bar-badge"><i class="fa-solid fa-headset"></i> Trung tâm hỗ trợ 24/7</span>
-        <span>Chúng tôi luôn lắng nghe và phản hồi mọi yêu cầu trong 15 phút</span>
+        <span>Trụ sở chính đặt tại Trường Đại học Kinh tế Quốc dân (NEU), Hà Nội</span>
       </div>
       <div class="top-bar-right">
         <a href="tel:19006868"><i class="fa-solid fa-phone"></i> Hotline: 1900 6868</a>
@@ -127,8 +127,8 @@
             <li class="nav-item"><a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
             <li class="nav-item"><a href="about.html" class="nav-link"><i class="fa-solid fa-seedling"></i> Giới thiệu</a></li>
             <li class="nav-item"><a href="products.html" class="nav-link"><i class="fa-solid fa-carrot"></i> Sản phẩm</a></li>
-            <li class="nav-item"><a href="products.html?cat=combo-gia-dinh" class="nav-link"><i class="fa-solid fa-box-open"></i> Gói Combo</a></li>
-            <li class="nav-item"><a href="news.html" class="nav-link"><i class="fa-solid fa-newspaper"></i> Tin tức</a></li>
+            <li class="nav-item"><a href="products.html?view=services" class="nav-link"><i class="fa-solid fa-box-open"></i> Gói Combo</a></li>
+            <li class="nav-item"><a href="news.html" class="nav-link"><i class="fa-solid fa-newspaper"></i> Cẩm nang (40 bài)</a></li>
             <li class="nav-item active"><a href="contact.html" class="nav-link"><i class="fa-solid fa-headset"></i> Liên hệ</a></li>
           </ul>
         </div>
@@ -146,7 +146,7 @@
           Gửi Yêu Cầu & Phản Ánh
         </h2>
         <p style="font-size: 14px; color: var(--muted); margin-bottom: 24px;">
-          Vui lòng điền thông tin vào biểu mẫu dưới đây, nhân viên EcoFresh sẽ liên hệ lại ngay với bạn.
+          Vui lòng điền thông tin vào biểu mẫu dưới đây, nhân viên EcoFresh Market sẽ liên hệ lại ngay với bạn trong vòng 15 phút.
         </p>
 
         <form id="contact-form" onsubmit="handleContactSubmit(event)">
@@ -169,23 +169,23 @@
             </div>
             <div class="form-group">
               <label class="form-label">Địa chỉ sinh sống:</label>
-              <input type="text" id="contact-address" class="form-control" placeholder="Quận/Huyện, Tỉnh/Thành phố">
+              <input type="text" id="contact-address" class="form-control" placeholder="Quận Hai Bà Trưng, Hà Nội">
             </div>
           </div>
 
           <div class="form-group">
             <label class="form-label">Chủ đề liên hệ:</label>
             <select id="contact-subject" class="form-control">
-              <option value="tu-van">Tư vấn chọn mua thực phẩm sạch</option>
+              <option value="tu-van">Tư vấn chọn mua thực phẩm sạch & Combo tuần</option>
               <option value="htx">Đăng ký làm Hợp tác xã / Nhà cung cấp liên kết</option>
               <option value="khieu-nai">Báo lỗi sản phẩm & Yêu cầu đổi trả 1-1</option>
-              <option value="b2b">Hợp tác cung ứng nông sản cho doanh nghiệp</option>
+              <option value="b2b">Hợp tác cung ứng nông sản cho bếp ăn doanh nghiệp</option>
             </select>
           </div>
 
           <div class="form-group">
             <label class="form-label">Nội dung chi tiết (*):</label>
-            <textarea id="contact-message" class="form-control" rows="5" placeholder="Mô tả cụ thể yêu cầu của bạn..." required></textarea>
+            <textarea id="contact-message" class="form-control" rows="5" placeholder="Mô tả cụ thể yêu cầu hoặc thắc mắc của bạn..." required></textarea>
           </div>
 
           <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 15px;">
@@ -195,14 +195,17 @@
         </form>
       </section>
 
-      <!-- Contact Info & Interactive Map -->
+      <!-- Contact Info & Interactive Map pointing to NEU -->
       <section class="contact-info-box">
         
         <div class="info-card">
-          <div class="info-icon"><i class="fa-solid fa-building"></i></div>
+          <div class="info-icon"><i class="fa-solid fa-graduation-cap"></i></div>
           <div>
-            <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 4px;">Trụ sở chính & Hub kho lạnh</h4>
-            <p style="font-size: 13.5px; color: var(--muted); line-height: 1.5;">Số 123 Đường Cầu Giấy, Phường Dịch Vọng, Quận Cầu Giấy, Thành phố Hà Nội.</p>
+            <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 4px;">Trụ sở chính dự án EcoFresh Market</h4>
+            <p style="font-size: 13.5px; color: var(--slate); line-height: 1.5;">
+              <strong>Số 207 Đường Giải Phóng, Phường Đồng Tâm, Quận Hai Bà Trưng, Thành phố Hà Nội</strong><br>
+              <span style="color:var(--primary-dark); font-weight:600;"><i class="fa-solid fa-building-columns"></i> Trường Đại học Kinh tế Quốc dân (NEU)</span>
+            </p>
           </div>
         </div>
 
@@ -215,10 +218,10 @@
           </div>
         </div>
 
-        <!-- Google Maps Iframe -->
+        <!-- Google Maps Iframe: Đại học Kinh tế Quốc dân (NEU) -->
         <div class="map-frame-box">
           <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.863855881441!2d105.78918687596959!3d21.038132787453474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab354920c233%3A0x5d0313a3bfdc4f37!2zQ-G6p3UgR2nhuqV5LCBIw6AgTuG7mWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1700000000000!5m2!1svi!2s" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.7176465492984!2d105.84074577596853!3d21.00395708763071!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac76ccab6dd7%3A0x55e92a5b07a97d03!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBLaW5oIHThur8gUXXhu5FjIGTDom4gKE5FVSk!5e0!3m2!1svi!2s!4v1718000000000!5m2!1svi!2s" 
             width="100%" 
             height="100%" 
             style="border:0;" 
@@ -238,7 +241,7 @@
     <div class="container">
       <div class="footer-bottom">
         <div>© 2026 EcoFresh Market. Đề án môn học Xây dựng Website Thương Mại Điện Tử.</div>
-        <div>Hotline: 1900 6868 • Email: cskh@ecofresh.vn</div>
+        <div>Trụ sở: Số 207 Giải Phóng, Hai Bà Trưng, Hà Nội (Đại học Kinh tế Quốc dân) • Hotline: 1900 6868</div>
       </div>
     </div>
   </footer>
@@ -250,9 +253,8 @@
       e.preventDefault();
       const name = document.getElementById('contact-name').value;
       const phone = document.getElementById('contact-phone').value;
-      const subject = document.getElementById('contact-subject').value;
       
-      showToast(`Cảm ơn bạn ${name}! EcoFresh đã tiếp nhận yêu cầu và sẽ liên hệ qua SĐT ${phone} trong 15 phút.`);
+      showToast(`Cảm ơn bạn ${name}! EcoFresh Market đã tiếp nhận thông tin và sẽ gọi qua SĐT ${phone} trong 15 phút.`);
       document.getElementById('contact-form').reset();
     }
   </script>

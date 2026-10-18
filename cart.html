@@ -421,7 +421,7 @@
     <div class="container">
       <div class="footer-bottom">
         <div>© 2026 EcoFresh Market. Đề án môn học Xây dựng Website Thương Mại Điện Tử.</div>
-        <div>Hotline giải quyết khiếu nại: 1900 6868</div>
+        <div>Trụ sở: Số 207 Giải Phóng, Hai Bà Trưng, Hà Nội (Đại học Kinh tế Quốc dân - NEU) • Hotline giải quyết khiếu nại: 1900 6868</div>
       </div>
     </div>
   </footer>
@@ -460,14 +460,14 @@
             <div class="cart-item-price">${formatCurrency(item.price)} <span style="font-size:12px; color:var(--muted); font-weight:normal;">/ ${item.unit}</span></div>
           </div>
           <div class="qty-ctrl-box">
-            <button type="button" class="qty-btn" onclick="updateCartQuantity(${item.id}, -1)">-</button>
+            <button type="button" class="qty-btn" onclick="updateCartQuantity('${item.id}', -1)">-</button>
             <span class="qty-val">${item.quantity}</span>
-            <button type="button" class="qty-btn" onclick="updateCartQuantity(${item.id}, 1)">+</button>
+            <button type="button" class="qty-btn" onclick="updateCartQuantity('${item.id}', 1)">+</button>
           </div>
           <div style="font-size:14px; font-weight:800; min-width:80px; text-align:right;">
             ${formatCurrency(item.price * item.quantity)}
           </div>
-          <button type="button" class="item-delete-btn" title="Xóa món" onclick="removeFromCart(${item.id})">
+          <button type="button" class="item-delete-btn" title="Xóa món" onclick="removeFromCart('${item.id}')">
             <i class="fa-solid fa-trash-can"></i>
           </button>
         </div>
