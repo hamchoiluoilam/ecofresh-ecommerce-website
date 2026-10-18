@@ -183,24 +183,62 @@ function renderMiniCart() {
   `).join('');
 }
 
+// Remove Vietnamese Tones for fuzzy search
+function removeVietnameseTones(str) {
+  if (!str) return '';
+  str = str.toLowerCase();
+  str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  str = str.replace(/[đĐ]/g, 'd');
+  return str;
+}
+
+// Match search product intelligently (handles multi-words like 'thịt heo' matching 'Thịt ba chỉ heo', accents/no accents)
+function matchSearchProduct(p, keyword) {
+  if (!keyword) return false;
+  const rawKey = keyword.trim().toLowerCase();
+  const normKey = removeVietnameseTones(rawKey);
+  const words = rawKey.split(/\s+/).filter(Boolean);
+  const normWords = normKey.split(/\s+/).filter(Boolean);
+
+  const rawTarget = `${p.name} ${p.categoryName || ''} ${p.origin || ''} ${p.description || ''}`.toLowerCase();
+  const normTarget = removeVietnameseTones(rawTarget);
+
+  if (rawTarget.includes(rawKey) || normTarget.includes(normKey)) return true;
+
+  const allRawWordsFound = words.every(w => rawTarget.includes(w));
+  const allNormWordsFound = normWords.every(w => normTarget.includes(w));
+
+  return allRawWordsFound || allNormWordsFound;
+}
+
 // Instant Search with Autocomplete
 function setupSearchAutocomplete() {
   const searchInput = document.querySelector('.search-input');
   const dropdown = document.querySelector('.search-results-dropdown');
   if (!searchInput || !dropdown) return;
 
+  const handleFullSearch = (kw) => {
+    if (!kw) return;
+    dropdown.classList.remove('active');
+    if (window.location.pathname.endsWith('products.html')) {
+      if (typeof window.executeCatalogSearch === 'function') {
+        window.executeCatalogSearch(kw);
+      } else {
+        window.location.search = `?q=${encodeURIComponent(kw)}`;
+      }
+    } else {
+      window.location.href = `products.html?q=${encodeURIComponent(kw)}`;
+    }
+  };
+
   searchInput.addEventListener('input', (e) => {
-    const keyword = e.target.value.trim().toLowerCase();
+    const keyword = e.target.value.trim();
     if (keyword.length < 2) {
       dropdown.classList.remove('active');
       return;
     }
 
-    const matches = PRODUCTS.filter(p => 
-      p.name.toLowerCase().includes(keyword) || 
-      p.categoryName.toLowerCase().includes(keyword) ||
-      p.origin.toLowerCase().includes(keyword)
-    );
+    const matches = PRODUCTS.filter(p => matchSearchProduct(p, keyword));
 
     if (matches.length === 0) {
       dropdown.innerHTML = `
@@ -222,6 +260,21 @@ function setupSearchAutocomplete() {
     }
     dropdown.classList.add('active');
   });
+
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleFullSearch(searchInput.value.trim());
+    }
+  });
+
+  const searchBtn = document.querySelector('.search-btn');
+  if (searchBtn) {
+    searchBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      handleFullSearch(searchInput.value.trim());
+    });
+  }
 
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.header-search')) {

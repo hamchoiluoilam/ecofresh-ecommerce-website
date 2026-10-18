@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gói Combo & Dịch Vụ Đi Chợ Định Kỳ - EcoFresh Market</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .combo-hero-section {
+      background: linear-gradient(135deg, #064E3B 0%, #047857 60%, #10B981 100%);
+      color: white;
+      padding: 60px 0 50px;
+      border-radius: 0 0 32px 32px;
+      margin-bottom: 50px;
+      box-shadow: 0 10px 25px -5px rgba(6, 78, 59, 0.2);
+    }
+    .combo-hero-inner {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .combo-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 700;
+      color: #A7F3D0;
+      margin-bottom: 14px;
+    }
+    .combo-hero-title {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .combo-hero-desc {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #D1FAE5;
+      margin-bottom: 24px;
+    }
+    .combo-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      backdrop-filter: blur(8px);
+    }
+    .combo-stat-item {
+      text-align: center;
+    }
+    .combo-stat-num {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .combo-stat-label {
+      font-size: 12px;
+      color: #D1FAE5;
+      margin-top: 2px;
+    }
+
+    /* Subscription Packages Grid */
+    .services-catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-bottom: 60px;
+    }
+    .service-card {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 26px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: var(--transition);
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 32px -8px rgba(0,0,0,0.1);
+      border-color: var(--primary-light);
+    }
+    .service-card.featured {
+      border: 2px solid var(--primary);
+      box-shadow: 0 16px 32px -8px rgba(16, 185, 129, 0.2);
+      background: linear-gradient(180deg, #FFFFFF 0%, #F0FDF4 100%);
+    }
+    .service-badge {
+      position: absolute;
+      top: -13px;
+      right: 24px;
+      background: var(--accent);
+      color: #000;
+      font-weight: 800;
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      box-shadow: var(--shadow-sm);
+    }
+    .service-card h3 {
+      font-size: 21px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .service-price {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--primary-deep);
+      margin-bottom: 12px;
+    }
+    .service-frequency {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--primary-dark);
+      background: var(--primary-bg);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      margin-bottom: 14px;
+      width: fit-content;
+    }
+    .service-ideal {
+      font-size: 13.5px;
+      color: var(--muted);
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px dashed var(--border);
+    }
+    .service-features {
+      list-style: none;
+      margin-bottom: 26px;
+      flex: 1;
+    }
+    .service-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      color: var(--slate);
+      margin-bottom: 11px;
+      line-height: 1.5;
+    }
+    .service-features i {
+      color: var(--primary);
+      margin-top: 3px;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* Meal Kits Grid */
+    .mealkit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-bottom: 60px;
+    }
+    .mealkit-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+    }
+    .mealkit-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-light);
+    }
+    .mealkit-thumb-wrap {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+      background: var(--light-bg);
+    }
+    .mealkit-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .mealkit-card:hover .mealkit-thumb-wrap img {
+      transform: scale(1.05);
+    }
+    .mealkit-body {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .mealkit-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .mealkit-desc {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 14px;
+      flex: 1;
+    }
+    .mealkit-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .mealkit-price {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--primary-deep);
+    }
+    .mealkit-old-price {
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    /* Step Timeline */
+    .steps-process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+    .step-box {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+    .step-number {
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
+      color: white;
+      font-weight: 800;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      font-size: 15px;
+    }
+    .step-box h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+    .step-box p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 900px) {
+      .combo-hero-inner { grid-template-columns: 1fr; }
+      .services-catalog-grid { grid-template-columns: 1fr; }
+      .mealkit-grid { grid-template-columns: 1fr; }
+      .steps-process-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-left">
+        <span class="top-bar-badge"><i class="fa-solid fa-leaf"></i> Dịch vụ độc quyền</span>
+        <span>Giao định kỳ 3 lần/tuần • Miễn phí vận chuyển chuỗi lạnh • Đổi món linh hoạt 24/7</span>
+      </div>
+      <div class="top-bar-right">
+        <a href="tel:19006868"><i class="fa-solid fa-phone"></i> Hotline tư vấn: 1900 6868</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="brand-logo">
+          <div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+          <div>EcoFresh<span class="highlight">.</span></div>
+        </a>
+
+        <div class="header-search">
+          <div class="search-wrapper">
+            <i class="fa-solid fa-magnifying-glass" style="color: var(--muted); margin-right: 8px;"></i>
+            <input type="text" class="search-input" placeholder="Tìm kiếm gói combo, dịch vụ...">
+            <button class="search-btn"><i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+          <div class="search-results-dropdown"></div>
+        </div>
+
+        <div class="header-actions">
+          <a href="cart.html" class="header-action-btn">
+            <div class="action-icon-wrap">
+              <i class="fa-solid fa-basket-shopping"></i>
+              <span class="badge-count cart-count-badge">0</span>
+            </div>
+            <div class="action-text">
+              <div class="label">Giỏ hàng</div>
+              <div class="value header-cart-total">0đ</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+      <div class="container">
+        <div class="nav-inner">
+          <ul class="main-nav">
+            <li class="nav-item"><a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
+            <li class="nav-item"><a href="about.html" class="nav-link"><i class="fa-solid fa-seedling"></i> Giới thiệu</a></li>
+            <li class="nav-item"><a href="products.html" class="nav-link"><i class="fa-solid fa-carrot"></i> Sản phẩm</a></li>
+            <li class="nav-item active"><a href="combo.html" class="nav-link"><i class="fa-solid fa-box-open"></i> Gói Combo & Dịch vụ</a></li>
+            <li class="nav-item"><a href="news.html" class="nav-link"><i class="fa-solid fa-newspaper"></i> Tin tức & Cẩm nang</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link"><i class="fa-solid fa-headset"></i> Liên hệ</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Banner for Combo & Services -->
+  <section class="combo-hero-section">
+    <div class="container">
+      <div class="combo-hero-inner">
+        <div>
+          <span class="combo-hero-badge"><i class="fa-solid fa-star"></i> MÔ HÌNH FARM-TO-TABLE HIỆN ĐẠI</span>
+          <h1 class="combo-hero-title">Giải Pháp Đi Chợ Định Kỳ & Bữa Ăn Sơ Chế Thông Minh</h1>
+          <p class="combo-hero-desc">
+            Không còn nỗi lo chen chúc siêu thị mỗi chiều tan tầm hay vứt bỏ thực phẩm thừa héo úa. EcoFresh Market tự động lên thực đơn cân bằng dinh dưỡng, sơ chế sẵn sàng nấu ngay trong 15 phút và giao đều đặn 3 lần/tuần đến tận cửa nhà bạn.
+          </p>
+          <div class="combo-stats-grid">
+            <div class="combo-stat-item">
+              <div class="combo-stat-num">8 Giờ</div>
+              <div class="combo-stat-label">Tiết kiệm mỗi tuần</div>
+            </div>
+            <div class="combo-stat-item">
+              <div class="combo-stat-num">20%</div>
+              <div class="combo-stat-label">Rẻ hơn mua lẻ</div>
+            </div>
+            <div class="combo-stat-item">
+              <div class="combo-stat-num">0 Đồng</div>
+              <div class="combo-stat-label">Phí ship chuỗi lạnh</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); border-radius: var(--radius-lg); padding: 28px; backdrop-filter: blur(10px);">
+          <h3 style="font-size: 20px; font-weight: 800; color: white; margin-bottom: 12px;">
+            <i class="fa-solid fa-shield-halved" style="color:var(--accent);"></i> 4 Cam Kết Vàng EcoFresh
+          </h3>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:12px; font-size:14px; color:#D1FAE5;">
+            <li><i class="fa-solid fa-circle-check" style="color:var(--accent); margin-right:8px;"></i> 100% Nông sản thu hoạch sớm từ các HTX VietGAP & Organic</li>
+            <li><i class="fa-solid fa-circle-check" style="color:var(--accent); margin-right:8px;"></i> Sơ chế bằng nước ozone sạch 99.9%, đóng túi hút chân không</li>
+            <li><i class="fa-solid fa-circle-check" style="color:var(--accent); margin-right:8px;"></i> Giao bằng thùng giữ nhiệt đá gel sinh học 4 - 8°C</li>
+            <li><i class="fa-solid fa-circle-check" style="color:var(--accent); margin-right:8px;"></i> Đổi trả hàng mới trong 60 phút nếu phát hiện dập nát</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Container -->
+  <main class="container">
+
+    <!-- Section 1: Subscription Packages -->
+    <section>
+      <div class="section-header" style="margin-bottom: 30px;">
+        <div class="section-title-wrap">
+          <h2><i class="fa-solid fa-calendar-check" style="color:var(--primary);"></i> Các Gói Đăng Ký Đi Chợ Định Kỳ (Thanh Toán Trực Tuyến)</h2>
+          <p>Đăng ký 1 lần, thảnh thơi cả tháng — Tự động giao đúng lịch, không cần đặt lại từng ngày</p>
+        </div>
+      </div>
+
+      <div class="services-catalog-grid" id="services-subscription-grid"></div>
+    </section>
+
+    <!-- Section 2: Meal-Kits & Family Box -->
+    <section style="margin-top: 20px;">
+      <div class="section-header" style="margin-bottom: 30px;">
+        <div class="section-title-wrap">
+          <h2><i class="fa-solid fa-utensils" style="color:var(--primary);"></i> Combo Thực Đơn Gia Đình & Meal-Kit Nấu Nhanh 15 Phút</h2>
+          <p>Nguyên liệu tươi sạch đã rửa nhặt, cắt thái và tẩm ướp sẵn theo khẩu phần dinh dưỡng</p>
+        </div>
+      </div>
+
+      <div class="mealkit-grid" id="mealkits-grid"></div>
+    </section>
+
+    <!-- Section 3: How it works -->
+    <section style="margin-top: 30px;">
+      <div class="section-header" style="margin-bottom: 30px;">
+        <div class="section-title-wrap">
+          <h2><i class="fa-solid fa-route" style="color:var(--primary);"></i> Quy Trình 4 Bước Phục Vụ Chuỗi Lạnh</h2>
+          <p>Đơn giản, minh bạch và tiện lợi tối đa cho gia đình hiện đại</p>
+        </div>
+      </div>
+
+      <div class="steps-process-grid">
+        <div class="step-box">
+          <div class="step-number">1</div>
+          <h4>Chọn gói combo</h4>
+          <p>Chọn gói phù hợp số lượng thành viên và thời gian giao mong muốn.</p>
+        </div>
+        <div class="step-box">
+          <div class="step-number">2</div>
+          <h4>Thu hoạch & Sơ chế</h4>
+          <p>Nông trại hái sớm trong ngày, nhặt rửa sạch và đóng gói hút chân không.</p>
+        </div>
+        <div class="step-box">
+          <div class="step-number">3</div>
+          <h4>Vận chuyển lạnh</h4>
+          <p>Bảo quản trong thùng cách nhiệt kèm túi đá gel ở nhiệt độ 4 đến 8 độ C.</p>
+        </div>
+        <div class="step-box">
+          <div class="step-number">4</div>
+          <h4>Giao tận cửa nhà</h4>
+          <p>Đúng khung giờ hẹn, nhận hàng tươi ngon và nấu ngay bữa cơm trọn vị.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="master-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col">
+          <div class="brand-logo" style="color: white; margin-bottom: 12px;">
+            <div class="logo-icon" style="background: var(--primary);"><i class="fa-solid fa-leaf"></i></div>
+            <div>EcoFresh<span style="color: var(--primary-light);">.</span></div>
+          </div>
+          <p class="footer-desc">Công ty Cổ phần Thương mại Điện tử Nông sản Xanh EcoFresh.</p>
+          <ul class="footer-contact-list">
+            <li><i class="fa-solid fa-location-dot"></i> Số 207 Giải Phóng, Hai Bà Trưng, Hà Nội (Đại học Kinh tế Quốc dân - NEU)</li>
+            <li><i class="fa-solid fa-phone"></i> Hotline: 1900 6868</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Về chúng tôi</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">Giới thiệu công ty</a></li>
+            <li><a href="products.html">Sản phẩm nông sản</a></li>
+            <li><a href="news.html">Cẩm nang Eat Clean</a></li>
+            <li><a href="contact.html">Liên hệ hỗ trợ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Chính sách</h4>
+          <ul class="footer-links">
+            <li><a href="cart.html">Vận chuyển lạnh</a></li>
+            <li><a href="about.html">Đổi trả 1-1 trong 24h</a></li>
+            <li><a href="contact.html">Bảo mật thông tin</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Thanh toán an toàn</h4>
+          <p style="font-size: 13px; color: #D1FAE5; margin-bottom: 10px;">Chấp nhận thanh toán chuyển khoản VietQR và ví điện tử VNPAY/MoMo cho toàn bộ các gói dịch vụ định kỳ.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 EcoFresh Market. Đề án môn học Xây dựng Website Thương Mại Điện Tử.</div>
+        <div>Trụ sở: Số 207 Giải Phóng, Hai Bà Trưng, Hà Nội (Đại học Kinh tế Quốc dân) • Hotline: 1900 6868</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products-data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    function renderComboPage() {
+      // 1. Render Subscription Packages
+      const subContainer = document.getElementById('services-subscription-grid');
+      if (subContainer) {
+        subContainer.innerHTML = SERVICES.map(s => `
+          <div class="service-card ${s.id === 'sub-family' ? 'featured' : ''}">
+            ${s.id === 'sub-family' ? '<span class="service-badge">PHỔ BIẾN NHẤT</span>' : ''}
+            <h3>${s.name}</h3>
+            <div class="service-price">${s.price}</div>
+            <div class="service-frequency"><i class="fa-solid fa-clock"></i> ${s.frequency}</div>
+            <p class="service-ideal">Phù hợp: <strong>${s.idealFor}</strong></p>
+            <ul class="service-features">
+              ${s.features.map(f => `<li><i class="fa-solid fa-check"></i> <span>${f}</span></li>`).join('')}
+            </ul>
+            <button class="btn btn-primary" onclick="bookService('${s.id}')" style="width:100%; padding:12px; font-size:14.5px;">
+              <i class="fa-solid fa-basket-shopping" style="margin-right:6px;"></i> Đăng ký gói & Đi tới thanh toán
+            </button>
+          </div>
+        `).join('');
+      }
+
+      // 2. Render Meal Kits & Combo Boxes (products from category 'combo-gia-dinh')
+      const kitContainer = document.getElementById('mealkits-grid');
+      if (kitContainer) {
+        const comboProds = PRODUCTS.filter(p => p.category === 'combo-gia-dinh');
+        kitContainer.innerHTML = comboProds.map(p => `
+          <div class="mealkit-card">
+            <div class="mealkit-thumb-wrap">
+              <img src="${p.image}" alt="${p.name}">
+              <span class="badge-cert" style="position:absolute; top:12px; left:12px;">${p.cert}</span>
+            </div>
+            <div class="mealkit-body">
+              <h3 class="mealkit-title">${p.name}</h3>
+              <div style="font-size:12.5px; color:var(--primary-dark); font-weight:700; margin-bottom:8px;">
+                <i class="fa-solid fa-box-open"></i> ${p.unit}
+              </div>
+              <p class="mealkit-desc">${p.description}</p>
+              <div class="mealkit-price-row">
+                <span class="mealkit-price">${formatCurrency(p.price)}</span>
+                ${p.oldPrice ? `<span class="mealkit-old-price">${formatCurrency(p.oldPrice)}</span>` : ''}
+              </div>
+              <button class="btn btn-primary" onclick="bookService(${p.id})" style="width:100%;">
+                <i class="fa-solid fa-basket-shopping" style="margin-right:6px;"></i> Đặt combo & Đi tới thanh toán
+              </button>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderComboPage();
+    });
+  </script>
+</body>
+</html>

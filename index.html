@@ -119,9 +119,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="products.html?cat=combo-gia-dinh" class="nav-link">
-                <i class="fa-solid fa-box-open"></i> Gói Combo & Dịch vụ <span class="nav-badge-hot">HOT</span>
-              </a>
+              <a href="combo.html" class="nav-link"><i class="fa-solid fa-box-open"></i> Gói Combo & Dịch vụ</a>
             </li>
             <li class="nav-item"><a href="news.html" class="nav-link"><i class="fa-solid fa-newspaper"></i> Cẩm nang & Tin tức</a></li>
             <li class="nav-item"><a href="contact.html" class="nav-link"><i class="fa-solid fa-headset"></i> Liên hệ & Phản ánh</a></li>
@@ -267,9 +265,10 @@
       <div class="tab-buttons">
         <button class="tab-btn active" onclick="filterTab('all', this)"><i class="fa-solid fa-border-all"></i> Tất cả sản phẩm</button>
         <button class="tab-btn" onclick="filterTab('rau-cu', this)"><i class="fa-solid fa-carrot"></i> Rau củ hữu cơ</button>
-        <button class="tab-btn" onclick="filterTab('trai-cay', this)"><i class="fa-solid fa-apple-whole"></i> Trái cây tươi</button>
         <button class="tab-btn" onclick="filterTab('thit-hai-san', this)"><i class="fa-solid fa-drumstick-bite"></i> Thịt & Hải sản</button>
-        <button class="tab-btn" onclick="filterTab('combo-gia-dinh', this)"><i class="fa-solid fa-bowl-food"></i> Combo bữa ăn</button>
+        <button class="tab-btn" onclick="filterTab('trai-cay', this)"><i class="fa-solid fa-apple-whole"></i> Trái cây tươi</button>
+        <button class="tab-btn" onclick="filterTab('gao-ngu-coc', this)"><i class="fa-solid fa-wheat-awn"></i> Gạo & Hạt dinh dưỡng</button>
+        <button class="tab-btn" onclick="filterTab('gia-vi-tu-nhien', this)"><i class="fa-solid fa-mortar-pestle"></i> Gia vị tự nhiên</button>
       </div>
 
       <div class="products-grid-5" id="main-products-grid"></div>
@@ -286,7 +285,7 @@
           <p>Bạn không có thời gian đi chợ mỗi ngày? Hãy để EcoFresh Market lên thực đơn dinh dưỡng, sơ chế sẵn và giao tận nhà 3 lần/tuần với chi phí tiết kiệm đến 20%.</p>
         </div>
         <div class="service-banner-action">
-          <a href="javascript:void(0)" onclick="bookService('sub-family')" class="btn btn-accent"><i class="fa-solid fa-basket-shopping"></i> Đăng ký combo & Thanh toán ngay</a>
+          <a href="combo.html" class="btn btn-accent"><i class="fa-solid fa-box-open"></i> Xem chi tiết & Đăng ký combo</a>
         </div>
       </div>
     </div>
@@ -498,15 +497,19 @@
     function renderCategories() {
       const container = document.getElementById('categories-container');
       if (!container) return;
-      container.innerHTML = CATEGORIES.map(c => `
-        <div class="cat-item-card" onclick="window.location.href='products.html?cat=${c.id}'">
+      container.innerHTML = CATEGORIES.map(c => {
+        const prodCount = PRODUCTS.filter(p => p.category === c.id).length;
+        const targetUrl = c.id === 'combo-gia-dinh' ? 'combo.html' : `products.html?cat=${c.id}`;
+        return `
+        <div class="cat-item-card" onclick="window.location.href='${targetUrl}'">
           <div class="cat-thumb-wrap">
             <img src="${c.image}" alt="${c.name}">
           </div>
           <div class="cat-name">${c.name}</div>
-          <div class="cat-count">${c.count} sản phẩm</div>
+          <div class="cat-count">${prodCount} sản phẩm</div>
         </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
     // Render Flash Sale Products
@@ -607,19 +610,16 @@
     function renderHomeNews() {
       const container = document.getElementById('home-news-container');
       if (!container) return;
-      container.innerHTML = NEWS.map(n => `
-        <div class="news-card" onclick="window.location.href='news.html'">
-          <div class="news-thumb">
-            <img src="${n.thumbnail}" alt="${n.title}">
+      container.innerHTML = NEWS.slice(0, 6).map(n => `
+        <div class="news-card" onclick="window.location.href='news.html'" style="padding: 24px; display:flex; flex-direction:column; border-left:4px solid var(--primary); cursor:pointer; background:white; border-radius:var(--radius-md); box-shadow:var(--shadow-sm); transition:var(--transition);">
+          <div class="news-meta" style="margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+            <span class="news-cat">${n.category}</span>
+            <span style="font-size:12px; color:var(--muted);"><i class="fa-regular fa-calendar"></i> ${n.date}</span>
           </div>
-          <div class="news-body">
-            <div class="news-meta">
-              <span class="news-cat">${n.category}</span>
-              <span><i class="fa-regular fa-calendar"></i> ${n.date}</span>
-            </div>
-            <h3 class="news-title">${n.title}</h3>
-            <p class="news-sapo">${n.sapo}</p>
-            <div class="news-read-more">Đọc tiếp bài viết <i class="fa-solid fa-arrow-right"></i></div>
+          <h3 class="news-title" style="font-size:17px; font-weight:800; margin-bottom:10px; line-height:1.4; color:var(--dark);">${n.title}</h3>
+          <p class="news-sapo" style="font-size:13.5px; color:var(--muted); line-height:1.6; margin-bottom:14px; flex:1;">${n.sapo}</p>
+          <div class="news-read-more" style="color:var(--primary); font-weight:700; font-size:13px; margin-top:auto; display:flex; align-items:center; gap:6px;">
+            Đọc bài viết <i class="fa-solid fa-arrow-right"></i>
           </div>
         </div>
       `).join('');

@@ -326,7 +326,7 @@
               </div>
             </label>
 
-            <label class="payment-option-card" onclick="selectPayment('cod')">
+            <label class="payment-option-card" id="payment-option-cod" onclick="selectPayment('cod')">
               <input type="radio" name="payment_method" value="cod">
               <div>
                 <strong>Thanh toán khi nhận hàng (COD)</strong>
@@ -341,6 +341,10 @@
                 <div style="font-size: 12px; color: var(--muted);">Thẻ ngân hàng nội địa Napas & Thẻ quốc tế Visa/Master</div>
               </div>
             </label>
+
+            <div id="combo-cod-disabled-notice" style="display:none; background:#FEF3C7; border:1px solid #F59E0B; border-radius:var(--radius-sm); padding:10px 14px; font-size:12.5px; color:#92400E; margin-top:8px; line-height:1.5;">
+              <i class="fa-solid fa-circle-exclamation"></i> <strong>Lưu ý:</strong> Đơn hàng có Gói Combo hoặc Dịch vụ định kỳ không áp dụng phương thức COD. Quý khách vui lòng chọn thanh toán trước qua <strong>VietQR</strong> hoặc <strong>VNPAY/MoMo</strong>.
+            </div>
           </div>
 
           <!-- VietQR Box -->
@@ -475,6 +479,29 @@
 
       const subtotal = AppState.cart.reduce((s, i) => s + (i.price * i.quantity), 0);
       updateSummary(subtotal);
+
+      // Check if cart has combo or subscription
+      const hasComboOrService = AppState.cart.some(item => 
+        item.isService || 
+        item.category === 'combo-gia-dinh' || 
+        (typeof item.id === 'string' && item.id.startsWith('sub-')) ||
+        (item.name && (item.name.toLowerCase().includes('combo') || item.name.toLowerCase().includes('gói đi chợ') || item.name.toLowerCase().includes('dịch vụ')))
+      );
+
+      const codOption = document.getElementById('payment-option-cod');
+      const codNotice = document.getElementById('combo-cod-disabled-notice');
+      if (codOption) {
+        if (hasComboOrService) {
+          codOption.style.display = 'none';
+          if (codNotice) codNotice.style.display = 'block';
+          if (currentPaymentMethod === 'cod') {
+            selectPaymentMethod('vietqr');
+          }
+        } else {
+          codOption.style.display = 'flex';
+          if (codNotice) codNotice.style.display = 'none';
+        }
+      }
     }
 
     function updateSummary(subtotal) {
@@ -532,9 +559,19 @@
     }
 
     function selectPayment(method) {
+      selectPaymentMethod(method);
+    }
+
+    function selectPaymentMethod(method) {
       currentPaymentMethod = method;
-      document.querySelectorAll('.payment-option-card').forEach(c => c.classList.remove('active'));
-      event.currentTarget.classList.add('active');
+      document.querySelectorAll('.payment-option-card').forEach(c => {
+        c.classList.remove('active');
+        const radio = c.querySelector('input[type="radio"]');
+        if (radio && radio.value === method) {
+          c.classList.add('active');
+          radio.checked = true;
+        }
+      });
 
       const qrBox = document.getElementById('vietqr-preview-box');
       if (qrBox) {

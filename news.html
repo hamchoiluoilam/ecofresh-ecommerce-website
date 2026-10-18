@@ -27,36 +27,36 @@
       background: white;
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 280px 1fr;
+      padding: 24px 28px;
       box-shadow: var(--shadow-sm);
       transition: var(--transition);
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      border-left: 4px solid transparent;
     }
     .news-vertical-item:hover {
       transform: translateY(-3px);
       box-shadow: var(--shadow-md);
       border-color: var(--primary-light);
+      border-left-color: var(--primary);
     }
-    .news-vertical-thumb {
-      height: 100%;
-      min-height: 200px;
-      overflow: hidden;
+    .news-vertical-item .news-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--dark);
+      margin: 10px 0 12px;
+      line-height: 1.4;
+      transition: color 0.2s ease;
     }
-    .news-vertical-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
+    .news-vertical-item:hover .news-title {
+      color: var(--primary-deep);
     }
-    .news-vertical-item:hover .news-vertical-thumb img {
-      transform: scale(1.06);
-    }
-    .news-vertical-body {
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
+    .news-vertical-item .news-sapo {
+      font-size: 14.5px;
+      color: var(--slate);
+      line-height: 1.65;
+      margin-bottom: 16px;
     }
     .news-sidebar-box {
       background: white;
@@ -155,7 +155,7 @@
             <li class="nav-item"><a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
             <li class="nav-item"><a href="about.html" class="nav-link"><i class="fa-solid fa-seedling"></i> Giới thiệu</a></li>
             <li class="nav-item"><a href="products.html" class="nav-link"><i class="fa-solid fa-carrot"></i> Sản phẩm</a></li>
-            <li class="nav-item"><a href="products.html?cat=combo-gia-dinh" class="nav-link"><i class="fa-solid fa-box-open"></i> Gói Combo</a></li>
+            <li class="nav-item"><a href="combo.html" class="nav-link"><i class="fa-solid fa-box-open"></i> Gói Combo & Dịch vụ</a></li>
             <li class="nav-item active"><a href="news.html" class="nav-link"><i class="fa-solid fa-newspaper"></i> Tin tức & Cẩm nang</a></li>
             <li class="nav-item"><a href="contact.html" class="nav-link"><i class="fa-solid fa-headset"></i> Liên hệ</a></li>
           </ul>
@@ -256,11 +256,15 @@
 
       if (currentKeyword) {
         const kw = currentKeyword.toLowerCase();
-        items = items.filter(n => 
-          n.title.toLowerCase().includes(kw) || 
-          n.sapo.toLowerCase().includes(kw) || 
-          n.content.toLowerCase().includes(kw)
-        );
+        const kwNoTone = removeVietnameseTones(kw);
+        const words = kw.split(/\s+/).filter(Boolean);
+        const wordsNoTone = kwNoTone.split(/\s+/).filter(Boolean);
+
+        items = items.filter(n => {
+          const text = `${n.title} ${n.sapo} ${n.content} ${n.author} ${n.category}`.toLowerCase();
+          const textNoTone = removeVietnameseTones(text);
+          return words.every(w => text.includes(w)) || wordsNoTone.every(w => textNoTone.includes(w));
+        });
       }
 
       if (countDisplay) {
@@ -280,21 +284,17 @@
 
       container.innerHTML = items.map(n => `
         <article class="news-vertical-item" onclick="openArticleModal(${n.id})">
-          <div class="news-vertical-thumb">
-            <img src="${n.thumbnail}" alt="${n.title}">
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:4px;">
+            <span class="news-cat">${n.category}</span>
+            <span style="font-size:12.5px; color:var(--muted);"><i class="fa-regular fa-calendar"></i> ${n.date}</span>
+            <span style="font-size:12.5px; color:var(--muted);"><i class="fa-regular fa-clock"></i> ${n.readTime}</span>
+            <span style="font-size:12.5px; color:var(--muted); margin-left:auto;"><i class="fa-solid fa-user-pen"></i> Tác giả: ${n.author}</span>
           </div>
-          <div class="news-vertical-body">
-            <div class="news-meta">
-              <span class="news-cat">${n.category}</span>
-              <span><i class="fa-regular fa-calendar"></i> ${n.date}</span>
-              <span><i class="fa-regular fa-clock"></i> ${n.readTime}</span>
-            </div>
-            <h2 class="news-title" style="font-size:18px;">${n.title}</h2>
-            <p class="news-sapo" style="font-size:14px; margin-bottom:14px;">${n.sapo}</p>
-            <div style="margin-top:auto; display:flex; justify-content:space-between; align-items:center;">
-              <span style="font-size:12px; color:var(--muted);"><i class="fa-solid fa-user-pen"></i> ${n.author}</span>
-              <span class="news-read-more">Đọc toàn bộ <i class="fa-solid fa-arrow-right"></i></span>
-            </div>
+          <h2 class="news-title">${n.title}</h2>
+          <p class="news-sapo">${n.sapo}</p>
+          <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px dashed var(--border); padding-top:14px; margin-top:auto;">
+            <span style="font-size:12.5px; color:var(--primary-dark); font-weight:600;"><i class="fa-solid fa-book-open"></i> Xem chi tiết nội dung & hướng dẫn</span>
+            <span class="news-read-more" style="font-weight:700; color:var(--primary);">Đọc toàn bộ <i class="fa-solid fa-arrow-right"></i></span>
           </div>
         </article>
       `).join('');
@@ -322,17 +322,16 @@
       modalContent.innerHTML = `
         <div style="margin-bottom: 16px;">
           <span class="news-cat">${article.category}</span>
-          <span style="font-size:12px; color:var(--muted); margin-left:8px;"><i class="fa-regular fa-calendar"></i> ${article.date} • Tác giả: ${article.author}</span>
+          <span style="font-size:12px; color:var(--muted); margin-left:8px;"><i class="fa-regular fa-calendar"></i> ${article.date} • Tác giả: ${article.author} • Thời gian đọc: ${article.readTime}</span>
         </div>
-        <h1 style="font-size: 24px; font-weight: 800; color: var(--dark); line-height: 1.3; margin-bottom: 14px;">${article.title}</h1>
-        <div style="background: var(--light-bg); border-left: 4px solid var(--primary); padding: 12px 16px; border-radius: 4px; font-style: italic; color: var(--slate); font-size: 14.5px; margin-bottom: 20px;">
+        <h1 style="font-size: 24px; font-weight: 800; color: var(--dark); line-height: 1.35; margin-bottom: 14px;">${article.title}</h1>
+        <div style="background: var(--light-bg); border-left: 4px solid var(--primary); padding: 14px 18px; border-radius: 4px; font-style: italic; color: var(--slate); font-size: 15px; line-height: 1.6; margin-bottom: 24px;">
           ${article.sapo}
         </div>
-        <img src="${article.thumbnail}" style="width: 100%; height: 320px; object-fit: cover; border-radius: var(--radius-md); margin-bottom: 20px;">
-        <div style="font-size: 15px; line-height: 1.8; color: var(--slate);">
+        <div style="font-size: 15px; line-height: 1.85; color: var(--slate); padding: 4px 0;">
           ${article.content}
         </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:16px; margin-top:24px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:18px; margin-top:28px;">
           <span style="font-size:13px; font-weight:700;">Chia sẻ bài viết này:</span>
           <div style="display:flex; gap:10px;">
             <a href="https://facebook.com" target="_blank" class="btn btn-outline-white" style="color:#1877F2; padding:6px 14px; font-size:13px;"><i class="fa-brands fa-facebook"></i> Facebook</a>

@@ -273,8 +273,8 @@
             <li class="nav-item"><a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
             <li class="nav-item"><a href="about.html" class="nav-link"><i class="fa-solid fa-seedling"></i> Giới thiệu</a></li>
             <li class="nav-item active"><a href="products.html" class="nav-link"><i class="fa-solid fa-carrot"></i> Sản phẩm</a></li>
-            <li class="nav-item"><a href="products.html?view=services" class="nav-link"><i class="fa-solid fa-box-open"></i> Gói Combo & Dịch vụ</a></li>
-            <li class="nav-item"><a href="news.html" class="nav-link"><i class="fa-solid fa-newspaper"></i> Tin tức</a></li>
+            <li class="nav-item"><a href="combo.html" class="nav-link"><i class="fa-solid fa-box-open"></i> Gói Combo & Dịch vụ</a></li>
+            <li class="nav-item"><a href="news.html" class="nav-link"><i class="fa-solid fa-newspaper"></i> Tin tức & Cẩm nang</a></li>
             <li class="nav-item"><a href="contact.html" class="nav-link"><i class="fa-solid fa-headset"></i> Liên hệ</a></li>
           </ul>
         </div>
@@ -303,9 +303,9 @@
             <span><i class="fa-solid fa-tag" style="color:var(--primary);"></i> Khoảng giá (VNĐ)</span>
           </div>
           <div class="price-range-inputs">
-            <input type="number" id="price-min" class="price-input" placeholder="Từ" value="0">
+            <input type="number" id="price-min" class="price-input" placeholder="Từ" value="0" min="0" step="10000">
             <span>-</span>
-            <input type="number" id="price-max" class="price-input" placeholder="Đến" value="500000">
+            <input type="number" id="price-max" class="price-input" placeholder="Đến" value="500000" min="0" step="10000">
           </div>
           <button class="btn btn-primary" onclick="applyFilters()" style="width:100%; margin-top:10px; padding:8px; font-size:13px;">
             Áp dụng giá
@@ -359,17 +359,6 @@
 
         <!-- Product Grid -->
         <div class="products-grid-5" id="catalog-products-grid" style="grid-template-columns: repeat(3, 1fr);"></div>
-
-        <!-- Service Packages Section (Khi chọn view=services hoặc cuộn xuống) -->
-        <div id="services-section-wrapper" style="margin-top: 50px;">
-          <div class="section-header">
-            <div class="section-title-wrap">
-              <h2><i class="fa-solid fa-box-open" style="color:var(--primary);"></i> Các gói dịch vụ sơ chế & Đi chợ định kỳ</h2>
-              <p>Dịch vụ chuyên biệt giải phóng thời gian cho gia đình bận rộn</p>
-            </div>
-          </div>
-          <div class="services-catalog-grid" id="services-grid"></div>
-        </div>
 
       </main>
 
@@ -448,8 +437,16 @@
   <script>
     let activeCat = '';
     let activeSubCat = '';
+    let searchQuery = '';
 
-    // Render 2-Level Category Sidebar Tree
+    window.executeCatalogSearch = function(kw) {
+      searchQuery = kw;
+      const searchInput = document.querySelector('.search-input');
+      if (searchInput) searchInput.value = kw;
+      applyFilters();
+    };
+
+    // Render 2-Level Category Sidebar Tree with 100% dynamic counts
     function renderCategoryTree() {
       const tree = document.getElementById('sidebar-cat-tree');
       if (!tree) return;
@@ -461,23 +458,32 @@
             <span>(${PRODUCTS.length})</span>
           </button>
         </li>
-      ` + CATEGORIES.map(c => `
+      ` + CATEGORIES.map(c => {
+        const actualCatCount = PRODUCTS.filter(p => p.category === c.id).length;
+        return `
         <li class="cat-parent-item">
           <button class="cat-parent-btn ${activeCat === c.id ? 'active' : ''}" onclick="toggleCategory('${c.id}')">
             <span><i class="${c.icon}" style="margin-right:6px; color:var(--primary);"></i> ${c.name}</span>
-            <i class="fa-solid fa-chevron-down" style="font-size:11px;"></i>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:12px; color:var(--muted); font-weight:600;">(${actualCatCount})</span>
+              <i class="fa-solid fa-chevron-down" style="font-size:11px;"></i>
+            </div>
           </button>
           <ul class="cat-sub-list ${activeCat === c.id ? 'active' : ''}" id="sub-list-${c.id}">
-            ${c.children.map(sub => `
+            ${c.children.map(sub => {
+              const actualSubCount = PRODUCTS.filter(p => p.subCategory === sub.id).length;
+              return `
               <li class="cat-sub-item">
                 <a href="javascript:void(0)" class="${activeSubCat === sub.id ? 'active' : ''}" onclick="selectSubCategory('${c.id}', '${sub.id}')">
-                  ${sub.name} <span style="font-size:11px; float:right;">(${sub.count})</span>
+                  ${sub.name} <span style="font-size:11px; float:right; font-weight:600; color:var(--slate);">(${actualSubCount})</span>
                 </a>
               </li>
-            `).join('')}
+              `;
+            }).join('')}
           </ul>
         </li>
-      `).join('');
+        `;
+      }).join('');
     }
 
     function toggleCategory(catId) {
@@ -518,6 +524,7 @@
         if (activeSubCat && p.subCategory !== activeSubCat) return false;
         if (p.price < minPrice || p.price > maxPrice) return false;
         if (checkedCerts.length > 0 && !checkedCerts.some(c => p.cert.includes(c))) return false;
+        if (searchQuery && typeof matchSearchProduct === 'function' && !matchSearchProduct(p, searchQuery)) return false;
         return true;
       });
 
@@ -534,7 +541,8 @@
           <div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px; background: white; border-radius: var(--radius-md);">
             <i class="fa-solid fa-basket-shopping" style="font-size: 48px; color: var(--muted); margin-bottom: 12px;"></i>
             <h3>Không có sản phẩm nào phù hợp</h3>
-            <p style="color: var(--muted); font-size: 14px;">Hãy thử điều chỉnh lại khoảng giá hoặc bỏ bớt tiêu chí lọc</p>
+            <p style="color: var(--muted); font-size: 14px;">Hãy thử điều chỉnh lại từ khóa "${searchQuery || ''}", khoảng giá hoặc bỏ bớt tiêu chí lọc</p>
+            <button onclick="resetFilters()" style="margin-top:12px; padding:8px 16px; background:var(--primary); color:white; border-radius:var(--radius-sm); font-weight:600;">Xem tất cả sản phẩm</button>
           </div>
         `;
         return;
@@ -577,42 +585,30 @@
       document.querySelectorAll('.cert-filter').forEach(cb => cb.checked = false);
       activeCat = '';
       activeSubCat = '';
+      searchQuery = '';
+      const searchInput = document.querySelector('.search-input');
+      if (searchInput) searchInput.value = '';
       renderCategoryTree();
       applyFilters();
-    }
-
-    // Render Services
-    function renderServices() {
-      const container = document.getElementById('services-grid');
-      if (!container) return;
-      container.innerHTML = SERVICES.map(s => `
-        <div class="service-card ${s.id === 'sub-family' ? 'featured' : ''}">
-          ${s.id === 'sub-family' ? '<span class="service-badge">PHỔ BIẾN NHẤT</span>' : ''}
-          <h3>${s.name}</h3>
-          <div class="service-price">${s.price}</div>
-          <div style="font-size: 13px; color: var(--primary-dark); font-weight: 700; margin-bottom: 12px;">
-            <i class="fa-solid fa-clock"></i> ${s.frequency}
-          </div>
-          <p style="font-size: 13px; color: var(--muted); margin-bottom: 16px;">Phù hợp: <strong>${s.idealFor}</strong></p>
-          <ul class="service-features">
-            ${s.features.map(f => `<li><i class="fa-solid fa-check"></i> <span>${f}</span></li>`).join('')}
-          </ul>
-          <button class="btn btn-primary" onclick="bookService('${s.id}')" style="width:100%;">
-            <i class="fa-solid fa-basket-shopping" style="margin-right:6px;"></i> Đăng ký & Đi tới thanh toán
-          </button>
-        </div>
-      `).join('');
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       // Parse URL parameters
       const params = new URLSearchParams(window.location.search);
+      if (params.get('view') === 'services' || params.get('cat') === 'combo-gia-dinh') {
+        window.location.href = 'combo.html';
+        return;
+      }
       if (params.get('cat')) activeCat = params.get('cat');
       if (params.get('sub')) activeSubCat = params.get('sub');
+      if (params.get('q')) {
+        searchQuery = params.get('q');
+        const searchInput = document.querySelector('.search-input');
+        if (searchInput) searchInput.value = searchQuery;
+      }
 
       renderCategoryTree();
       applyFilters();
-      renderServices();
     });
   </script>
 </body>

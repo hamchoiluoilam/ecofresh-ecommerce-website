@@ -11,22 +11,22 @@ const CATEGORIES = [
     "slug": "rau-cu-huu-co",
     "icon": "fa-solid fa-carrot",
     "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=400&q=80",
-    "count": 32,
+    "count": 14,
     "children": [
       {
         "id": "rau-an-la",
         "name": "Rau ăn lá Đà Lạt",
-        "count": 14
+        "count": 6
       },
       {
         "id": "rau-an-cu-qua",
         "name": "Rau ăn củ & quả",
-        "count": 12
+        "count": 6
       },
       {
         "id": "nam-tuoi",
         "name": "Nấm tươi sạch sinh học",
-        "count": 6
+        "count": 2
       }
     ]
   },
@@ -36,27 +36,27 @@ const CATEGORIES = [
     "slug": "thit-hai-san-sinh-hoc",
     "icon": "fa-solid fa-drumstick-bite",
     "image": "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=400&q=80",
-    "count": 28,
+    "count": 12,
     "children": [
       {
         "id": "thit-heo-sinh-hoc",
         "name": "Thịt heo vi sinh thảo dược",
-        "count": 8
+        "count": 2
       },
       {
         "id": "thit-bo-uc",
         "name": "Thịt bò ăn cỏ & Bê tơ",
-        "count": 7
+        "count": 2
       },
       {
         "id": "gia-cam-sinh-hoc",
         "name": "Gà đồi, Vịt cỏ tự nhiên",
-        "count": 6
+        "count": 3
       },
       {
         "id": "hai-san-tuoi",
         "name": "Thủy hải sản tươi sống",
-        "count": 7
+        "count": 5
       }
     ]
   },
@@ -66,17 +66,17 @@ const CATEGORIES = [
     "slug": "trai-cay-tuoi-sach",
     "icon": "fa-solid fa-apple-whole",
     "image": "https://images.unsplash.com/photo-1619566636858-adf3ef46400b?auto=format&fit=crop&w=400&q=80",
-    "count": 20,
+    "count": 5,
     "children": [
       {
         "id": "trai-cay-viet-nam",
         "name": "Trái cây đặc sản 3 miền",
-        "count": 12
+        "count": 4
       },
       {
         "id": "trai-cay-nhap-khau",
         "name": "Trái cây nhập khẩu hữu cơ",
-        "count": 8
+        "count": 1
       }
     ]
   },
@@ -86,17 +86,17 @@ const CATEGORIES = [
     "slug": "gao-ngu-coc-huu-co",
     "icon": "fa-solid fa-wheat-awn",
     "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80",
-    "count": 14,
+    "count": 7,
     "children": [
       {
         "id": "gao-st25",
         "name": "Gạo đặc sản ST25 & Gạo lứt",
-        "count": 6
+        "count": 2
       },
       {
         "id": "hat-dinh-duong",
         "name": "Hạt dinh dưỡng & Yến mạch",
-        "count": 8
+        "count": 5
       }
     ]
   },
@@ -106,17 +106,17 @@ const CATEGORIES = [
     "slug": "combo-thuc-don-gia-dinh",
     "icon": "fa-solid fa-bowl-food",
     "image": "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=400&q=80",
-    "count": 10,
+    "count": 3,
     "children": [
       {
         "id": "combo-tuan",
         "name": "Combo đi chợ tuần",
-        "count": 5
+        "count": 1
       },
       {
         "id": "meal-kit",
         "name": "Combo sơ chế Ready-to-cook",
-        "count": 5
+        "count": 2
       }
     ]
   },
@@ -126,17 +126,17 @@ const CATEGORIES = [
     "slug": "gia-vi-thao-moc",
     "icon": "fa-solid fa-mortar-pestle",
     "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=400&q=80",
-    "count": 12,
+    "count": 7,
     "children": [
       {
         "id": "mat-ong",
         "name": "Mật ong rừng & Thảo mộc",
-        "count": 6
+        "count": 3
       },
       {
         "id": "nuoc-mam",
         "name": "Nước mắm cá cơm truyền thống",
-        "count": 6
+        "count": 4
       }
     ]
   }
@@ -898,6 +898,258 @@ const PRODUCTS = [
     "soldPercent": 60,
     "description": "Gồm 5 loại nấm tươi (Đùi gà, nấm hương Sa Pa, nấm kim châm, nấm bào ngư, nấm rơm) kèm rau nhúng lẩu và gói nước dùng cốt củ quả hầm thanh ngọt.",
     "cookingTips": "Đun sôi nước dùng cốt củ quả, thả nấm vào nấu trong 5 phút là có thể thưởng thức nồi lẩu thơm lừng thanh khiết."
+  },
+  {
+    "id": 37,
+    "code": "EF-OC-CHO-250",
+    "name": "Hạt óc chó vàng Hartley tách vỏ hữu cơ",
+    "category": "gao-ngu-coc",
+    "subCategory": "hat-dinh-duong",
+    "categoryName": "Gạo & Ngũ cốc",
+    "price": 135000,
+    "oldPrice": 160000,
+    "unit": "Hộp 250g (hút chân không)",
+    "stock": 60,
+    "origin": "Nhập khẩu chính ngạch California, Hoa Kỳ",
+    "cert": "USDA Organic",
+    "rating": 5.0,
+    "reviewsCount": 112,
+    "image": "https://images.unsplash.com/photo-1583064313642-a7c14d49a5a1?auto=format&fit=crop&w=600&q=80",
+    "isFlashSale": true,
+    "soldPercent": 84,
+    "description": "Hạt óc chó giống Hartley thượng hạng nhân vàng béo ngậy, dồi dào axit béo Omega-3, vitamin E và folate cực kỳ tốt cho sự phát triển trí não mẹ bầu và trẻ nhỏ.",
+    "cookingTips": "Ăn trực tiếp mỗi ngày 5-7 hạt, làm sữa hạt dinh dưỡng hoặc rắc cùng sữa chua và granola."
+  },
+  {
+    "id": 38,
+    "code": "EF-MACCA-500",
+    "name": "Hạt mắc ca Đắk Lắk nứt vỏ sấy giòn tự nhiên",
+    "category": "gao-ngu-coc",
+    "subCategory": "hat-dinh-duong",
+    "categoryName": "Gạo & Ngũ cốc",
+    "price": 165000,
+    "oldPrice": 195000,
+    "unit": "Hộp 500g (kèm dụng cụ tách)",
+    "stock": 75,
+    "origin": "HTX Nông nghiệp Mắc ca Krông Năng, Đắk Lắk",
+    "cert": "OCOP 4 sao & VietGAP",
+    "rating": 4.9,
+    "reviewsCount": 98,
+    "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=600&q=80",
+    "isFlashSale": false,
+    "soldPercent": 68,
+    "description": "Nữ hoàng của các loại hạt sấy chín nứt vỏ tự nhiên không tẩm ướp hóa chất, nhân hạt trắng ngà béo ngậy tan trên đầu lưỡi.",
+    "cookingTips": "Dùng kìm nạy vỏ ăn trực tiếp hoặc xay làm sữa hạt mắc ca béo thơm cho cả gia đình."
+  },
+  {
+    "id": 39,
+    "code": "EF-YEN-MACH-500",
+    "name": "Yến mạch cán dẹt nguyên cám Haferflocken Đức",
+    "category": "gao-ngu-coc",
+    "subCategory": "hat-dinh-duong",
+    "categoryName": "Gạo & Ngũ cốc",
+    "price": 68000,
+    "oldPrice": 85000,
+    "unit": "Gói 500g",
+    "stock": 90,
+    "origin": "Nhập khẩu nguyên gói từ CHLB Đức",
+    "cert": "Bio Organic Đức",
+    "rating": 5.0,
+    "reviewsCount": 134,
+    "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=600&q=80",
+    "isFlashSale": true,
+    "soldPercent": 88,
+    "description": "Yến mạch nguyên cám 100% giàu chất xơ hòa tan Beta-Glucan, giúp giảm cholesterol xấu, no lâu và hỗ trợ giảm cân Eat Clean cực kỳ hiệu quả.",
+    "cookingTips": "Nấu cháo yến mạch tôm thịt trong 5 phút, làm yến mạch ngâm qua đêm Overnight Oats hoặc làm bánh cookie yến mạch chuối."
+  },
+  {
+    "id": 40,
+    "code": "EF-HAT-CHIA-300",
+    "name": "Hạt chia đen Nam Mỹ hữu cơ nguyên chất",
+    "category": "gao-ngu-coc",
+    "subCategory": "hat-dinh-duong",
+    "categoryName": "Gạo & Ngũ cốc",
+    "price": 89000,
+    "oldPrice": 110000,
+    "unit": "Hũ 300g",
+    "stock": 50,
+    "origin": "Nhập khẩu chính ngạch Bolivia",
+    "cert": "USDA Organic",
+    "rating": 4.8,
+    "reviewsCount": 67,
+    "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80",
+    "isFlashSale": false,
+    "soldPercent": 52,
+    "description": "Hạt chia giàu canxi gấp 5 lần sữa tươi, giàu chất chống oxy hóa và chất xơ, giúp thanh lọc cơ thể và cải thiện hệ tiêu hóa.",
+    "cookingTips": "Ngâm vào nước lọc hoặc nước cam trong 10 phút, rắc vào sinh tố hoặc trộn cùng sữa chua hạt granola."
+  },
+  {
+    "id": 41,
+    "code": "EF-HANH-NHAN-350",
+    "name": "Hạt hạnh nhân rang bơ vỏ mỏng giòn rụm",
+    "category": "gao-ngu-coc",
+    "subCategory": "hat-dinh-duong",
+    "categoryName": "Gạo & Ngũ cốc",
+    "price": 125000,
+    "oldPrice": 150000,
+    "unit": "Hũ 350g",
+    "stock": 65,
+    "origin": "California, Hoa Kỳ",
+    "cert": "HACCP & Chuẩn kiểm nghiệm xuất khẩu",
+    "rating": 4.9,
+    "reviewsCount": 81,
+    "image": "https://images.unsplash.com/photo-1508746829417-e6f548d8d6ed?auto=format&fit=crop&w=600&q=80",
+    "isFlashSale": false,
+    "soldPercent": 61,
+    "description": "Hạnh nhân nguyên hạt rang bơ thơm phức, vỏ mỏng dễ tách, nhân hạt ngọt bùi chứa nhiều vitamin E nuôi dưỡng làn da sáng khỏe.",
+    "cookingTips": "Tách vỏ ăn vặt liền trong giờ làm việc hoặc đập vụn rắc lên các món salad trộn."
+  },
+  {
+    "id": 42,
+    "code": "EF-MAT-ONG-DB-500",
+    "name": "Mật ong hoa rừng Điện Biên nguyên chất giọt vàng",
+    "category": "gia-vi-tu-nhien",
+    "subCategory": "mat-ong",
+    "categoryName": "Gia vị tự nhiên",
+    "price": 175000,
+    "oldPrice": 210000,
+    "unit": "Chai thủy tinh 500ml",
+    "stock": 70,
+    "origin": "Rừng nguyên sinh Mường Phăng, Điện Biên",
+    "cert": "OCOP 4 sao & Không đường pha tạp",
+    "rating": 5.0,
+    "reviewsCount": 156,
+    "image": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=600&q=80",
+    "isFlashSale": true,
+    "soldPercent": 91,
+    "description": "Mật ong tự nhiên từ đàn ong hút mật hoa rừng hoang dã Tây Bắc, màu hổ phách sóng sánh, mùi thơm thanh khiết và vị ngọt dịu cổ họng.",
+    "cookingTips": "Pha nước ấm uống mỗi sáng ấm bụng tăng đề kháng, ướp thịt nướng hoặc pha chanh mật ong trị ho."
+  },
+  {
+    "id": 43,
+    "code": "EF-MAT-ONG-NHAN-500",
+    "name": "Mật ong hoa nhãn lồng Phố Hiến Hưng Yên",
+    "category": "gia-vi-tu-nhien",
+    "subCategory": "mat-ong",
+    "categoryName": "Gia vị tự nhiên",
+    "price": 145000,
+    "oldPrice": 170000,
+    "unit": "Chai thủy tinh 500ml",
+    "stock": 55,
+    "origin": "Vùng nhãn lồng Tiên Lữ, Hưng Yên",
+    "cert": "VietGAP & Kiểm nghiệm vi sinh",
+    "rating": 4.9,
+    "reviewsCount": 92,
+    "image": "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=600&q=80",
+    "isFlashSale": false,
+    "soldPercent": 65,
+    "description": "Mật ong quay vụ hoa nhãn tháng 3 thơm nồng nàn đặc trưng của hoa nhãn, giàu enzyme tiêu hóa tự nhiên.",
+    "cookingTips": "Dùng ướp gà nướng mật ong, pha trà cam đào sả hoặc làm bánh ngọt."
+  },
+  {
+    "id": 44,
+    "code": "EF-TINH-BOT-NGHE-250",
+    "name": "Tinh bột nghệ nếp đỏ Hưng Yên lọc tinh khiết",
+    "category": "gia-vi-tu-nhien",
+    "subCategory": "mat-ong",
+    "categoryName": "Gia vị tự nhiên",
+    "price": 130000,
+    "oldPrice": 160000,
+    "unit": "Hũ thủy tinh 250g",
+    "stock": 45,
+    "origin": "Làng nghề dược liệu Khoái Châu, Hưng Yên",
+    "cert": "Đạt chuẩn hàm lượng Curcumin cao",
+    "rating": 4.9,
+    "reviewsCount": 78,
+    "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80",
+    "isFlashSale": false,
+    "soldPercent": 58,
+    "description": "Chiết xuất từ củ nghệ nếp đỏ qua 18 lần lắng lọc tách dầu và bã nhựa, bột vàng óng mịn màng không hăng đắng, tốt cho dạ dày và làm đẹp da.",
+    "cookingTips": "Pha cùng mật ong và nước ấm uống trước bữa ăn 30 phút, hoặc làm gia vị tạo màu vàng tự nhiên cho món kho."
+  },
+  {
+    "id": 45,
+    "code": "EF-NUOC-MAM-PQ-520",
+    "name": "Nước mắm truyền thống Khải Hoàn Phú Quốc 40 độ đạm",
+    "category": "gia-vi-tu-nhien",
+    "subCategory": "nuoc-mam",
+    "categoryName": "Gia vị tự nhiên",
+    "price": 115000,
+    "oldPrice": 135000,
+    "unit": "Chai thủy tinh 520ml",
+    "stock": 85,
+    "origin": "Đảo ngọc Phú Quốc, Kiên Giang",
+    "cert": "Chỉ dẫn địa lý Liên minh Châu Âu (EU-PGI) & OCOP 5 sao",
+    "rating": 5.0,
+    "reviewsCount": 188,
+    "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=600&q=80",
+    "isFlashSale": true,
+    "soldPercent": 93,
+    "description": "Ủ chượp ròng rã 12-15 tháng trong thùng gỗ bời lời cổ thụ từ 100% cá cơm than tươi và muối hạt Bà Rịa, nước mắm màu cánh gián đậm đà hậu vị ngọt tự nhiên của đạm cá.",
+    "cookingTips": "Rót ra chén chấm trực tiếp kèm ớt tươi, hoặc nêm nếm canh và các món kho truyền thống."
+  },
+  {
+    "id": 46,
+    "code": "EF-TIEU-DEN-150",
+    "name": "Hạt tiêu đen Tiên Phước cay nồng thơm ngát",
+    "category": "gia-vi-tu-nhien",
+    "subCategory": "nuoc-mam",
+    "categoryName": "Gia vị tự nhiên",
+    "price": 65000,
+    "oldPrice": 80000,
+    "unit": "Hũ xay tiện lợi 150g",
+    "stock": 60,
+    "origin": "Xứ tiêu Tiên Phước, Quảng Nam",
+    "cert": "OCOP 4 sao & VietGAP",
+    "rating": 4.9,
+    "reviewsCount": 73,
+    "image": "https://images.unsplash.com/photo-1509358271058-acd22cc93898?auto=format&fit=crop&w=600&q=80",
+    "isFlashSale": false,
+    "soldPercent": 62,
+    "description": "Hạt tiêu đen già thu hái thủ công phơi nắng tự nhiên, hạt tròn đều chắc nịch, tinh dầu cay nồng thơm đặc trưng không pha lẫn tạp chất.",
+    "cookingTips": "Hũ có sẵn cối xay tiện dụng, xay trực tiếp lên các món bít tết, canh nóng hoặc thịt kho tàu."
+  },
+  {
+    "id": 47,
+    "code": "EF-MUOI-HONG-500",
+    "name": "Muối hồng Himalaya hạt mịn tự nhiên nguyên khoáng",
+    "category": "gia-vi-tu-nhien",
+    "subCategory": "nuoc-mam",
+    "categoryName": "Gia vị tự nhiên",
+    "price": 55000,
+    "oldPrice": 70000,
+    "unit": "Hũ 500g",
+    "stock": 90,
+    "origin": "Dãy núi đá muối Himalaya cổ đại",
+    "cert": "Thuần khiết 100% không tẩy trắng",
+    "rating": 4.8,
+    "reviewsCount": 65,
+    "image": "https://images.unsplash.com/photo-1518110903415-373b53110543?auto=format&fit=crop&w=600&q=80",
+    "isFlashSale": false,
+    "soldPercent": 50,
+    "description": "Được khai thác từ mỏ đá muối tự nhiên sâu trong lòng núi, chứa hơn 84 loại khoáng chất vi lượng thiết yếu, vị mặn thanh không chát gắt.",
+    "cookingTips": "Nêm ướp thịt cá, nấu canh hoặc làm muối chấm hoa quả chua ngọt."
+  },
+  {
+    "id": 48,
+    "code": "EF-DAU-PHONG-1L",
+    "name": "Dầu phộng nguyên chất ép lạnh thủ công Quảng Nam",
+    "category": "gia-vi-tu-nhien",
+    "subCategory": "nuoc-mam",
+    "categoryName": "Gia vị tự nhiên",
+    "price": 145000,
+    "oldPrice": 175000,
+    "unit": "Chai 1 Lít",
+    "stock": 40,
+    "origin": "HTX Dầu phụng Đại Lộc, Quảng Nam",
+    "cert": "OCOP 4 sao & Không chất bảo quản",
+    "rating": 5.0,
+    "reviewsCount": 89,
+    "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=600&q=80",
+    "isFlashSale": true,
+    "soldPercent": 77,
+    "description": "Ép cơ học lạnh từ 100% hạt lạc cúc sẻ giống bản địa của vùng đất phù sa Đại Lộc, màu vàng óng ả thơm lừng béo ngậy, điểm sôi cao an toàn cho tim mạch.",
+    "cookingTips": "Khử dầu cùng nén tươi để xào nấu rau củ hoặc nấu mì Quảng trứ danh miền Trung."
   }
 ];
 
