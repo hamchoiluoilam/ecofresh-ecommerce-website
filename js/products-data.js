@@ -683,7 +683,7 @@ const PRODUCTS = [
     "cert": "VietGAP",
     "rating": 5.0,
     "reviewsCount": 65,
-    "image": "https://cdnv2.tgdd.vn/bhx-static/bhx/Products/Images/8779/344634/bhx/nam-huong-150g-clone_202509060941323517.jpg",
+    "image": "https://namhoasen.com.vn/wp-content/uploads/2023/12/3-loai-nam-cuc-tot-cho-suc-khoe-2.jpg",
     "isFlashSale": false,
     "soldPercent": 55,
     "description": "Nấm hương tươi hái từ thân gỗ rừng ôn đới, mũ nấm dày thịt xốp mềm, mùi hương thơm đặc trưng đánh thức khứu giác.",
