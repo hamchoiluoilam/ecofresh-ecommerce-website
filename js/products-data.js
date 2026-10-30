@@ -1223,7 +1223,7 @@ const COOPERATIVES = [
     "scale": "30 hecta trên cao nguyên độ cao 1.050m",
     "annualYield": "380 tấn trái cây & rau quả / năm",
     "certCode": "GlobalGAP số GG-2022-897 & USDA Organic",
-    "image": "https://images.unsplash.com/photo-1592417817098-8f3d69104a47?auto=format&fit=crop&w=800&q=80",
+    "image": "https://tourghepgiare.vn/upload/moc-chau/nong-trai-bo-sua-moc-chau/nong-trai-bo-sua-moc-chau-1.jpg",
     "crops": "Dâu tây Hana giống Nhật, Bí ngòi xanh baby, Cải xoăn hữu cơ, Mận hậu Mộc Châu",
     "farmingProcess": "Khí hậu ôn đới mát mẻ quanh năm giúp cây trồng tích tụ lượng đường tự nhiên cao. Toàn bộ quy trình gieo hạt, tỉa nhánh và bắt sâu đều làm thủ công bằng tay. Nguồn phân bón sử dụng phân hữu cơ hoai mục ủ men vi sinh Nhật Bản.",
     "description": "Nổi tiếng với những quả dâu tây Hana ngọt lịm căng mọng và các dòng bí ngòi giòn ngọt được phân phối độc quyền tại hệ thống cửa hàng EcoFresh."
@@ -1262,7 +1262,7 @@ const COOPERATIVES = [
     "scale": "35 hecta vùng đất cát ven biển",
     "annualYield": "180 tấn măng tây xanh loại 1 / năm",
     "certCode": "VietGAP & OCOP 4 sao tỉnh Ninh Thuận",
-    "image": "https://images.unsplash.com/photo-1515471204630-e60b72958422?auto=format&fit=crop&w=800&q=80",
+    "image": "https://langngheviet.com.vn/stores/news_dataimages/2025/102025/30/16/1-san-pham-mang-tay-tay-tu20251030163058.jpg?rt=202511071142410",
     "crops": "Măng tây xanh loại 1, Củ cải trắng hữu cơ, Măng tây tím",
     "farmingProcess": "Tận dụng khí hậu nhiều nắng gió ven biển giúp cây tích lũy diệp lục tố cao. Đất cát pha được bón lót phân dê ủ hoai và tưới phun sương tự động bằng nguồn nước ngầm ngọt tự nhiên.",
     "description": "Cung ứng măng tây thân mập tròn đều, đọt non giòn ngọt không xơ, là sản phẩm bán chạy nhất trong thực đơn Eat Clean của EcoFresh."
